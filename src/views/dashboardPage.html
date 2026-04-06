@@ -8,7 +8,8 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
-    .stat-card{background:white;border-radius:12px;padding:1.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s,box-shadow 0.2s}
+    .stat-card{background:white;border-radius:12px;padding:0.75rem 0.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s,box-shadow 0.2s}
+    @media (min-width:640px){.stat-card{padding:1rem 0.75rem}}
     .stat-card:hover{transform:translateY(-4px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
     .stat-card-header{color:#6b7280;font-size:0.875rem;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
     .stat-card-value{font-size:2rem;font-weight:700;color:#1f2937;margin-bottom:0.25rem}
@@ -17,7 +18,7 @@
     .stat-card-trend.up{color:#10b981;background:#d1fae5}
     .stat-card-trend.down{color:#ef4444;background:#fee2e2}
     .stat-card-trend.flat{color:#6b7280;background:#f3f4f6}
-    .list-item{display:flex;align-items:center;justify-content:space-between;padding:1rem;border-radius:8px;transition:background 0.2s}
+    .list-item{display:flex;align-items:center;justify-content:space-between;padding:0.5rem;border-radius:8px;transition:background 0.2s}
     .list-item:hover{background:#f9fafb}
     .list-item:not(:last-child){border-bottom:1px solid #f3f4f6}
     .list-item-content{flex:1}
@@ -137,14 +138,14 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
-      <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <i class="fas fa-history text-indigo-500"></i>
           <h3 class="text-lg font-medium text-gray-900">自动提醒任务状态</h3>
         </div>
         <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Cron 可观测性</span>
       </div>
-      <div class="p-6" id="schedulerStatus">
+      <div class="px-2 py-3 sm:px-3 sm:py-4" id="schedulerStatus">
         <div class="loading-skeleton"></div>
       </div>
     </div>
@@ -156,66 +157,66 @@
     </div>
 
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
-      <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <i class="fas fa-calendar-check text-blue-500"></i>
           <h3 class="text-lg font-medium text-gray-900">最近支付</h3>
         </div>
         <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">过去7天</span>
       </div>
-      <div class="p-6" id="recentPayments">
+      <div class="px-2 py-3 sm:px-3 sm:py-4" id="recentPayments">
         <div class="loading-skeleton"></div>
       </div>
     </div>
 
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
-      <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <i class="fas fa-clock text-yellow-500"></i>
           <h3 class="text-lg font-medium text-gray-900">即将续费</h3>
         </div>
         <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">未来7天</span>
       </div>
-      <div class="p-6" id="upcomingRenewals">
+      <div class="px-2 py-3 sm:px-3 sm:py-4" id="upcomingRenewals">
         <div class="loading-skeleton"></div>
       </div>
     </div>
 
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
-      <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
         <div class="flex items-center gap-2">
           <i class="fas fa-stream text-indigo-500"></i>
           <h3 class="text-lg font-medium text-gray-900">自动提醒任务历史（最近10次）</h3>
         </div>
       </div>
-      <div class="p-6" id="schedulerStatusHistory">
+      <div class="px-2 py-3 sm:px-3 sm:py-4" id="schedulerStatusHistory">
         <div class="loading-skeleton"></div>
       </div>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fas fa-chart-bar text-purple-500"></i>
             <h3 class="text-lg font-medium text-gray-900">按类型支出排行</h3>
           </div>
           <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
         </div>
-        <div class="p-6" id="expenseByType">
+        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByType">
           <div class="loading-skeleton"></div>
         </div>
       </div>
 
       <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
           <div class="flex items-center gap-2">
             <i class="fas fa-folder text-green-500"></i>
             <h3 class="text-lg font-medium text-gray-900">按分类支出统计</h3>
           </div>
           <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
         </div>
-        <div class="p-6" id="expenseByCategory">
+        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByCategory">
           <div class="loading-skeleton"></div>
         </div>
       </div>
