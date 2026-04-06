@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>订阅管理系统</title>
+  <title>添加新订阅 - 订阅管理系统</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
   <style>
@@ -365,10 +365,10 @@
           <a href="/admin/dashboard" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-chart-line mr-1"></i>仪表盘
           </a>
-          <a href="/admin" class="text-indigo-600 border-b-2 border-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/admin" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-list mr-1"></i>订阅列表
           </a>
-          <a href="/admin/new" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/admin/new" class="text-indigo-600 border-b-2 border-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-plus mr-1"></i>添加订阅
           </a>
           <a href="/admin/config" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
@@ -408,94 +408,14 @@
       </div>
     </div>
   </nav>
-  
+
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
-      <div>
-        <h2 class="text-2xl font-bold text-gray-800">订阅列表</h2>
-        <p class="text-sm text-gray-500 mt-1">使用搜索与分类快速定位订阅，开启农历显示可同步查看农历日期</p>
-      </div>
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 w-full">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full lg:flex-1 lg:max-w-2xl">
-          <div class="relative flex-1 min-w-[200px] lg:max-w-md">
-            <input type="text" id="searchKeyword" placeholder="搜索名称、类型或备注..." class="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-              <i class="fas fa-search"></i>
-            </span>
-          </div>
-          <div class="sm:w-36 lg:w-32">
-            <select id="modeFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-sm">
-              <option value="">全部模式</option>
-              <option value="cycle">循环订阅</option>
-              <option value="reset">到期重置</option>
-            </select>
-          </div>
-          <div class="sm:w-44 lg:w-40">
-            <select id="categoryFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white text-sm">
-              <option value="">全部分类</option>
-            </select>
-          </div>
-
-        </div>
-        <div class="flex items-center space-x-3 lg:space-x-4">
-        <label class="lunar-toggle">
-          <input type="checkbox" id="listShowLunar" class="form-checkbox h-4 w-4 text-indigo-600 shrink-0">
-          <span class="text-gray-700">显示农历</span>
-        </label>
-        <a href="/admin/new" class="btn-primary text-white px-4 py-2 rounded-md text-sm font-medium flex items-center shrink-0">
-          <i class="fas fa-plus mr-2"></i>添加新订阅
-        </a>
-      </div>
-      </div>
+    <div class="mb-6">
+      <h2 class="text-2xl font-bold text-gray-800">添加新订阅</h2>
+      <p class="text-sm text-gray-500 mt-1">填写信息后保存，将返回订阅列表</p>
     </div>
-    
     <div class="table-container bg-white rounded-lg overflow-hidden">
-      <div class="overflow-x-auto">
-        <table class="w-full divide-y divide-gray-200 responsive-table">
-          <thead class="bg-gray-50">
-            <tr>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 23%;">
-                名称
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 13%;">
-                类型
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 18%;">
-                到期 <i class="fas fa-sort-up ml-1 text-indigo-500" title="按到期时间升序排列"></i>
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 10%;">
-                金额
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 13%;">
-                提醒
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 10%;">
-                状态
-              </th>
-              <th scope="col" class="px-4 py-3 text-left text-sm font-medium text-gray-500 uppercase tracking-wider" style="width: 13%;">
-                操作
-              </th>
-            </tr>
-          </thead>
-        <tbody id="subscriptionsBody" class="bg-white divide-y divide-gray-200">
-        </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <div id="subscriptionModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-gray-600 bg-opacity-50">
-    <div class="relative w-auto max-w-2xl mx-4 md:mx-auto my-12 bg-white rounded-lg shadow-xl">
-      <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 rounded-t-lg">
-        <div class="flex items-center justify-between">
-          <h3 id="modalTitle" class="text-lg font-medium text-gray-900">添加新订阅</h3>
-          <button id="closeModal" class="text-gray-400 hover:text-gray-600">
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-      </div>
-      
-      <form id="subscriptionForm" class="p-6 space-y-5">
+      <div class="p-6 sm:p-8"><form id="subscriptionForm" class="space-y-5">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">订阅名称 *</label>
@@ -708,10 +628,11 @@
           </button>
         </div>
       </form>
+      </div>
     </div>
   </div>
 
-  <script>
+<script>
     // 农历转换工具函数 - 前端版本
     const lunarCalendar = {
       // 农历数据 (1900-2100年)
@@ -2279,6 +2200,7 @@ const lunarBiz = {
       }
     }
     
+
     // 自定义日期选择器功能
     class CustomDatePicker {
       constructor(inputId, pickerId, calendarId, monthId, yearId, prevBtnId, nextBtnId) {
@@ -2860,10 +2782,7 @@ const lunarBiz = {
       }
       if (cancelBtn && !cancelBtn.dataset.bound) {
         cancelBtn.dataset.bound = 'true';
-        cancelBtn.addEventListener('click', () => {
-          document.getElementById('subscriptionModal').classList.add('hidden');
-          document.body.classList.remove('overflow-hidden'); // 恢复背景滚动
-        });
+        cancelBtn.addEventListener('click', () => { window.location.href = '/admin'; });
       }
 
       ['startDate', 'periodValue', 'periodUnit'].forEach(id => {
@@ -2960,11 +2879,6 @@ const lunarBiz = {
 	  updateLunarDisplay('expiryDate', 'expiryDateLunar');
 	}
     
-    document.getElementById('closeModal').addEventListener('click', () => {
-      document.getElementById('subscriptionModal').classList.add('hidden');
-      document.body.classList.remove('overflow-hidden'); // 恢复页面滚动
-    });
-    
     document.getElementById('subscriptionForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       
@@ -3022,9 +2936,13 @@ const lunarBiz = {
         
         if (result.success) {
           showToast((id ? '更新' : '添加') + '订阅成功', 'success');
-          document.getElementById('subscriptionModal').classList.add('hidden');
-          document.body.classList.remove('overflow-hidden'); // 恢复背景滚动
-          loadSubscriptions();
+          if (id) {
+            document.getElementById('subscriptionModal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            loadSubscriptions();
+          } else {
+            window.location.href = '/admin';
+          }
         } else {
           showToast((id ? '更新' : '添加') + '订阅失败: ' + (result.message || '未知错误'), 'error');
         }
@@ -3169,8 +3087,26 @@ const lunarBiz = {
     // 页面加载时检查时区更新
     window.addEventListener('load', () => {
       checkTimezoneUpdate();
-      loadSubscriptions();
+      if (document.getElementById('subscriptionsBody')) {
+        loadSubscriptions();
+      } else {
+        document.getElementById('subscriptionForm').reset();
+        document.getElementById('currency').value = 'CNY';
+        document.getElementById('subscriptionId').value = '';
+        clearFieldErrors();
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('startDate').value = today;
+        document.getElementById('category').value = '';
+        document.getElementById('reminderValue').value = '7';
+        document.getElementById('reminderUnit').value = 'day';
+        document.getElementById('isActive').checked = true;
+        document.getElementById('autoRenew').checked = true;
+        loadLunarPreference();
+        calculateExpiryDate();
+        setupModalEventListeners();
+      }
     });
+
     
     // 定期检查时区更新（每2秒检查一次）
     setInterval(checkTimezoneUpdate, 2000);

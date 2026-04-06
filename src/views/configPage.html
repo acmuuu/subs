@@ -7,8 +7,9 @@
   <title>系统配置 - 订阅管理系统</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  ${themeResources} <style>
-    
+  <style>
+    .table-container { width: 100%; overflow: hidden; }
+
     .toast {
       position: fixed; top: 20px; right: 20px; padding: 12px 20px; border-radius: 8px;
       color: white; font-weight: 500; z-index: 1000; transform: translateX(400px);
@@ -62,6 +63,7 @@
         color: #a5b4fc !important; /* 浅靛蓝 */
     }
   </style>
+  ${themeResources}
 </head>
 <body class="bg-gray-100 min-h-screen">
   <div id="toast-container"></div>
@@ -83,6 +85,9 @@
           </a>
           <a href="/admin" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-list mr-1"></i>订阅列表
+          </a>
+          <a href="/admin/new" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
+            <i class="fas fa-plus mr-1"></i>添加订阅
           </a>
           <a href="/admin/config" class="text-indigo-600 border-b-2 border-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-cog mr-1"></i>系统配置
@@ -109,6 +114,9 @@
         <a href="/admin" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-list w-6 text-center mr-2"></i>订阅列表
         </a>
+        <a href="/admin/new" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
+          <i class="fas fa-plus w-6 text-center mr-2"></i>添加订阅
+        </a>
         <a href="/admin/config" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-cog w-6 text-center mr-2"></i>系统配置
         </a>
@@ -119,10 +127,16 @@
     </div>
   </nav>
   
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="bg-white rounded-lg shadow-md p-6">
-      <h2 class="text-2xl font-bold text-gray-800 mb-6">系统配置</h2>
-      
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+      <div>
+        <h2 class="text-2xl font-bold text-gray-800">系统配置</h2>
+        <p class="text-sm text-gray-500 mt-1">管理账户、主题、通知渠道与定时任务等选项</p>
+      </div>
+    </div>
+
+    <div class="table-container bg-white rounded-lg overflow-hidden">
+      <div class="p-6 sm:p-8">
       <form id="configForm" class="space-y-8">
         <div class="border-b border-gray-200 pb-6">
           <h3 class="text-lg font-medium text-gray-900 mb-4">管理员账户</h3>
@@ -525,6 +539,7 @@
           </button>
         </div>
       </form>
+      </div>
     </div>
   </div>
 

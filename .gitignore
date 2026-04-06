@@ -1,0 +1,8 @@
+# 本地参考/草稿，不入库
+tmp/
+
+node_modules/
+.wrangler/
+.dev.vars
+.DS_Store
+*.log
