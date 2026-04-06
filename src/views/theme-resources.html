@@ -187,18 +187,19 @@
     color: var(--app-link) !important;
   }
 
-  html:not(.dark) .config-section {
-    border-color: var(--app-border);
-    background: var(--app-card);
+  html:not(.dark) .notifier-config {
+    border-top-color: var(--app-border);
+    background: transparent;
   }
 
-  html:not(.dark) .config-section.active {
-    background: linear-gradient(135deg, #FFFDF5, #FFF8E7);
-    border-color: var(--app-gold-light);
+  html:not(.dark) .notifier-config.active {
+    background: linear-gradient(90deg, rgba(184, 134, 11, 0.07) 0%, transparent 72%);
+    border-top-color: var(--app-gold-light);
   }
 
-  html:not(.dark) .config-section.inactive {
-    background: var(--app-bg2);
+  html:not(.dark) .notifier-config.inactive {
+    background: transparent;
+    opacity: 0.55;
   }
 
   html:not(.dark) body.login-container {

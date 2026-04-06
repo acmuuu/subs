@@ -29,30 +29,26 @@
     html.dark .toast.info { background-color: #2563eb; }
     html.dark .toast.warning { background-color: #d97706; }
     
-    .config-section { 
-      border: 1px solid #e5e7eb; 
-      border-radius: 8px; 
-      padding: 16px; 
-      margin-bottom: 24px; 
+    /* 通知渠道：仅顶部分隔线，避免与外层白卡片形成双层圆角框 */
+    .notifier-config {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
     }
-    .config-section.active { 
-      background-color: #f8fafc; 
-      border-color: #6366f1; 
+    .notifier-config.active {
+      opacity: 1;
+      border-top-color: #c7d2fe;
     }
-    .config-section.inactive { 
-      background-color: #f9fafb; 
-      opacity: 0.7; 
+    .notifier-config.inactive {
+      opacity: 0.55;
     }
-    /* === Config Page 暗黑模式修复 === */
-    html.dark .config-section {
-      border-color: #374151;
+    html.dark .notifier-config {
+      border-top-color: #374151;
     }
-    html.dark .config-section.active {
-      background-color: rgba(31, 41, 55, 0.5); /* #1f2937 with opacity */
-      border-color: #818cf8;
+    html.dark .notifier-config.active {
+      border-top-color: #818cf8;
     }
-    html.dark .config-section.inactive {
-      background-color: #111827;
+    html.dark .notifier-config.inactive {
       opacity: 0.5;
     }
     html.dark .bg-indigo-50 {
@@ -70,7 +66,7 @@
 
   <nav class="bg-white shadow-md relative z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+      <div class="flex justify-between h-14">
         <div class="flex items-center shrink-0">
           <div class="flex items-center">
             <i class="fas fa-calendar-check text-indigo-600 text-2xl mr-2"></i>
@@ -107,7 +103,7 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-b border-gray-200 w-full">
       <div class="px-4 pt-2 pb-4 space-y-2">
-        <div id="mobileTimeDisplay" class="px-3 py-2 text-xs text-indigo-600 text-right border-b border-gray-100 mb-2"></div>
+        <div id="mobileTimeDisplay" class="px-3 py-2.5 text-sm font-medium text-indigo-600 text-left border-b border-gray-100 mb-2 leading-snug"></div>
         <a href="/admin/dashboard" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-chart-line w-6 text-center mr-2"></i>仪表盘
         </a>
@@ -127,8 +123,8 @@
     </div>
   </nav>
   
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
       <div>
         <h2 class="text-2xl font-bold text-gray-800">系统配置</h2>
         <p class="text-sm text-gray-500 mt-1">管理账户、主题、通知渠道与定时任务等选项</p>
@@ -136,11 +132,11 @@
     </div>
 
     <div class="table-container bg-white rounded-lg overflow-hidden">
-      <div class="p-6 sm:p-8">
-      <form id="configForm" class="space-y-8">
-        <div class="border-b border-gray-200 pb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">管理员账户</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="px-2 py-3 sm:px-3 sm:py-4">
+      <form id="configForm" class="space-y-5">
+        <div class="border-b border-gray-200 pb-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-3">管理员账户</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label for="adminUsername" class="block text-sm font-medium text-gray-700">用户名</label>
               <input type="text" id="adminUsername" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -153,10 +149,10 @@
           </div>
         </div>
         
-        <div class="border-b border-gray-200 pb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">显示设置</h3>
+        <div class="border-b border-gray-200 pb-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-3">显示设置</h3>
           
-          <div class="mb-6">
+          <div class="mb-3">
             <label for="themeModeSelect" class="block text-sm font-medium text-gray-700 mb-1">主题模式</label>
             <select id="themeModeSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
               <option value="light">🌞 浅色模式</option>
@@ -166,7 +162,7 @@
             <p class="mt-1 text-sm text-gray-500">选择系统的外观风格</p>
           </div>
           
-          <div class="mb-6">
+          <div class="mb-3">
             <label class="inline-flex items-center">
               <input type="checkbox" id="showLunarGlobal" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" checked>
               <span class="ml-2 text-sm text-gray-700">在通知中显示农历日期</span>
@@ -176,9 +172,9 @@
         </div>
 
 
-        <div class="border-b border-gray-200 pb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">时区设置</h3>
-          <div class="mb-6">
+        <div class="border-b border-gray-200 pb-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-3">时区设置</h3>
+          <div class="mb-3">
           <label for="timezone" class="block text-sm font-medium text-gray-700 mb-1">时区选择</label>
           <select id="timezone" name="timezone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
             <option value="UTC">世界标准时间（UTC+0）</option>
@@ -205,9 +201,9 @@
         </div>
 
         
-        <div class="border-b border-gray-200 pb-6">
-          <h3 class="text-lg font-medium text-gray-900 mb-4">通知设置</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="border-b border-gray-200 pb-3">
+          <h3 class="text-lg font-medium text-gray-900 mb-3">通知设置</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
             <div>
               <label for="notificationHours" class="block text-sm font-medium text-gray-700">通知时段（UTC）</label>
               <input type="text" id="notificationHours" placeholder="例如：08, 12, 20 或输入 * 表示全天"
@@ -220,7 +216,7 @@
               <p class="mt-1">若 Cron 已设置为每小时执行，可用该字段限制实际发送提醒的小时段。</p>
             </div>
           </div>
-          <div class="mb-6">
+          <div class="mb-3">
             <label class="block text-sm font-medium text-gray-700 mb-3">通知方式（可多选）</label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label class="inline-flex items-center">
@@ -271,7 +267,7 @@
             </div>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-3">
             <label for="thirdPartyToken" class="block text-sm font-medium text-gray-700">第三方 API 访问令牌</label>
             <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
               <input type="text" id="thirdPartyToken" placeholder="留空表示不修改；输入新值将更新"
@@ -287,7 +283,7 @@
             <p class="mt-1 text-sm text-gray-500">调用 /api/notify/{token} 接口时需携带此令牌；留空表示禁用第三方 API 推送。</p>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-3">
             <label class="block text-sm font-medium text-gray-700 mb-3">调试设置</label>
             <label class="inline-flex items-center cursor-pointer select-none">
               <input type="checkbox" id="debugLogs" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
@@ -295,7 +291,7 @@
             </label>
           </div>
 
-          <div class="mb-6">
+          <div class="mb-3">
             <label for="paymentHistoryLimit" class="block text-sm font-medium text-gray-700">支付历史保留条数</label>
             <input type="number" id="paymentHistoryLimit" min="10" max="1000" step="1"
               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -303,9 +299,9 @@
             <p class="mt-1 text-sm text-gray-500">自动续订与手动续订后仅保留最近 N 条支付历史（建议 50~200，默认 100）。</p>
           </div>
           
-          <div id="telegramConfig" class="config-section">
+          <div id="telegramConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">Telegram 配置</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
               <div>
                 <label for="tgBotToken" class="block text-sm font-medium text-gray-700">Bot Token</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -328,9 +324,9 @@
             </div>
           </div>
           
-          <div id="notifyxConfig" class="config-section">
+          <div id="notifyxConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">NotifyX 配置</h4>
-            <div class="mb-4">
+            <div class="mb-3">
               <label for="notifyxApiKey" class="block text-sm font-medium text-gray-700">API Key</label>
               <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
                 <input type="text" id="notifyxApiKey" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -348,9 +344,9 @@
             </div>
           </div>
 
-          <div id="webhookConfig" class="config-section">
+          <div id="webhookConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">Webhook 通知 配置</h4>
-            <div class="grid grid-cols-1 gap-4 mb-4">
+            <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
                 <label for="webhookUrl" class="block text-sm font-medium text-gray-700">Webhook 通知 URL</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -394,9 +390,9 @@
             </div>
           </div>
 
-          <div id="wechatbotConfig" class="config-section">
+          <div id="wechatbotConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">企业微信机器人 配置</h4>
-            <div class="grid grid-cols-1 gap-4 mb-4">
+            <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
                 <label for="wechatbotWebhook" class="block text-sm font-medium text-gray-700">机器人 Webhook URL</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -436,9 +432,9 @@
             </div>
           </div>
 
-          <div id="emailConfig" class="config-section">
+          <div id="emailConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">邮件通知 配置</h4>
-            <div class="grid grid-cols-1 gap-4 mb-4">
+            <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
                 <label for="resendApiKey" class="block text-sm font-medium text-gray-700">Resend API Key</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
@@ -473,9 +469,9 @@
             </div>
           </div>
 
-          <div id="barkConfig" class="config-section">
+          <div id="barkConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">Bark 配置</h4>
-            <div class="grid grid-cols-1 gap-4 mb-4">
+            <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
                 <label for="barkServer" class="block text-sm font-medium text-gray-700">服务器地址</label>
                 <input type="url" id="barkServer" placeholder="https://api.day.app" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
@@ -508,9 +504,9 @@
             </div>
           </div>
 
-          <div id="gotifyConfig" class="config-section">
+          <div id="gotifyConfig" class="notifier-config">
             <h4 class="text-md font-medium text-gray-900 mb-3">Gotify 配置</h4>
-            <div class="grid grid-cols-1 gap-4 mb-4">
+            <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
                 <label for="gotifyServerUrl" class="block text-sm font-medium text-gray-700">Server URL</label>
                 <input type="url" id="gotifyServerUrl" placeholder="https://gotify.example.com" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
