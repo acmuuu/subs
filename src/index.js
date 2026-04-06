@@ -9,13 +9,15 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // 浏览器常请求 /favicon.ico，统一走 public/favicon.svg
+    // public/ 静态资源：favicon、页面拆出的 /css/*、/js/*、主题等
     if (env.ASSETS && request.method === 'GET') {
       const p = url.pathname;
-      if (p === '/favicon.ico' || p === '/favicon.svg') {
-        const assetPath = p === '/favicon.ico' ? '/favicon.svg' : p;
-        const assetReq = new Request(new URL(assetPath, url.origin), request);
+      if (p === '/favicon.ico') {
+        const assetReq = new Request(new URL('/favicon.svg', url.origin), request);
         const assetRes = await env.ASSETS.fetch(assetReq);
+        if (assetRes.status !== 404) return assetRes;
+      } else if (p === '/favicon.svg' || p.startsWith('/css/') || p.startsWith('/js/')) {
+        const assetRes = await env.ASSETS.fetch(request);
         if (assetRes.status !== 404) return assetRes;
       }
     }

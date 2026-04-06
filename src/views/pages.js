@@ -1,14 +1,14 @@
 // 页面模板 - 使用 text import 避免嵌套模板字面量问题
-import themeResourcesHtml from './theme-resources.html';
+import themeAssetsHtml from './theme-assets.html';
 import loginPageHtml from './loginPage.html';
 import adminPageHtml from './adminPage.html';
 import configPageHtml from './configPage.html';
 import dashboardPageHtml from './dashboardPage.html';
 import newSubscriptionPageHtml from './newSubscriptionPage.html';
 
-// themeResources 需要注入到每个页面模板中
+// 全局主题（字体、Buffett 浅色、暗色、移动端表格等）来自 public/css|js/theme.*
 function injectTheme(html) {
-  return html.replace(/\$\{themeResources\}/g, themeResourcesHtml);
+  return html.replace(/\$\{themeResources\}/g, themeAssetsHtml);
 }
 
 const loginPage = injectTheme(loginPageHtml);

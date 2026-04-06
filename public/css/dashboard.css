@@ -1,0 +1,61 @@
+
+    .stat-card{background:white;border-radius:12px;padding:0.75rem 0.5rem;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform 0.2s,box-shadow 0.2s}
+    @media (min-width:640px){.stat-card{padding:1rem 0.75rem}}
+    .stat-card:hover{transform:translateY(-4px);box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+    .stat-card-header{color:#6b7280;font-size:0.875rem;font-weight:500;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:0.5rem}
+    .stat-card-value{font-size:2rem;font-weight:700;color:#1f2937;margin-bottom:0.25rem}
+    .stat-card-subtitle{color:#9ca3af;font-size:0.875rem}
+    .stat-card-trend{display:inline-flex;align-items:center;gap:0.25rem;font-size:0.875rem;margin-top:0.5rem;padding:0.25rem 0.5rem;border-radius:6px}
+    .stat-card-trend.up{color:#10b981;background:#d1fae5}
+    .stat-card-trend.down{color:#ef4444;background:#fee2e2}
+    .stat-card-trend.flat{color:#6b7280;background:#f3f4f6}
+    .list-item{display:flex;align-items:center;justify-content:space-between;padding:0.5rem;border-radius:8px;transition:background 0.2s}
+    .list-item:hover{background:#f9fafb}
+    .list-item:not(:last-child){border-bottom:1px solid #f3f4f6}
+    .list-item-content{flex:1}
+    .list-item-name{font-weight:600;color:#1f2937;margin-bottom:0.25rem}
+    .list-item-meta{display:flex;align-items:center;gap:1rem;font-size:0.875rem;color:#6b7280;flex-wrap:wrap}
+    .list-item-amount{font-size:1.125rem;font-weight:700;color:#10b981}
+    .list-item-badge{display:inline-block;padding:0.25rem 0.75rem;border-radius:12px;font-size:0.75rem;font-weight:500;background:#e0e7ff;color:#4f46e5}
+    .ranking-item{margin-bottom:1rem}
+    .ranking-item-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+    .ranking-item-name{font-weight:600;color:#1f2937}
+    .ranking-item-value{display:flex;align-items:center;gap:0.5rem;font-size:0.875rem}
+    .ranking-item-amount{font-weight:700;color:#1f2937}
+    .ranking-item-percentage{color:#10b981}
+    .ranking-progress{width:100%;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+    .ranking-progress-bar{height:100%;border-radius:4px;transition:width 0.6s ease}
+    .ranking-progress-bar.color-1{background:linear-gradient(90deg,#6366f1,#8b5cf6)}
+    .ranking-progress-bar.color-2{background:linear-gradient(90deg,#10b981,#059669)}
+    .ranking-progress-bar.color-3{background:linear-gradient(90deg,#f59e0b,#d97706)}
+    .ranking-progress-bar.color-4{background:linear-gradient(90deg,#ef4444,#dc2626)}
+    .ranking-progress-bar.color-5{background:linear-gradient(90deg,#8b5cf6,#7c3aed)}
+    .empty-state{text-align:center;padding:3rem 1rem;color:#9ca3af}
+    .empty-state-icon{font-size:3rem;margin-bottom:1rem;opacity:0.5}
+    .empty-state-text{font-size:0.875rem}
+    /* === Dashboard 暗黑模式修复 === */
+    html.dark .stat-card {
+      background: #1f2937; /* 深色卡片背景 */
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    }
+    html.dark .stat-card-header { color: #9ca3af; }
+    html.dark .stat-card-value { color: #f3f4f6; } /* 白色文字 */
+    html.dark .stat-card-subtitle { color: #6b7280; } 
+    html.dark .stat-card-trend.flat { background: #374151; color: #9ca3af; }
+    html.dark .stat-card-trend.up { background: rgba(16, 185, 129, 0.2); }
+    html.dark .stat-card-trend.down { background: rgba(239, 68, 68, 0.2); }
+    html.dark .list-item:hover { background: #374151; }
+    html.dark .list-item:not(:last-child) { border-bottom-color: #374151; }
+    html.dark .list-item-name { color: #f3f4f6; } /* 列表项名称变白 */
+    html.dark .list-item-meta { color: #9ca3af; }
+    html.dark .list-item-badge { background: #3730a3; color: #c7d2fe; }
+    html.dark .ranking-item-name { color: #f3f4f6; } /* 排行榜名称变白 */
+    html.dark .ranking-item-amount { color: #e5e7eb; } /* 金额变白 */
+    html.dark .ranking-progress { background: #374151; }
+    /* 修复右上角的标签 */
+    html.dark .bg-indigo-100 { background-color: rgba(99, 102, 241, 0.2) !important; color: #a5b4fc !important; }
+    html.dark .text-indigo-800 { color: #c7d2fe !important; }
+    .loading-skeleton{background:linear-gradient(90deg,#f3f4f6 25%,#e5e7eb 50%,#f3f4f6 75%);background-size:200% 100%;animation:loading 1.5s infinite;height:100px;border-radius:8px}
+    /* 暗黑模式骨架屏 */
+    html.dark .loading-skeleton { background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%); }
+    @keyframes loading{0%{background-position:200% 0}100%{background-position:-200% 0}}

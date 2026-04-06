@@ -1,0 +1,51 @@
+
+    .table-container { width: 100%; overflow: hidden; }
+
+    .toast {
+      position: fixed; top: 20px; right: 20px; padding: 12px 20px; border-radius: 8px;
+      color: white; font-weight: 500; z-index: 1000; transform: translateX(400px);
+      transition: all 0.3s ease-in-out; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    .toast.show { transform: translateX(0); }
+    .toast.success { background-color: #10b981; }
+    .toast.error { background-color: #ef4444; }
+    .toast.info { background-color: #3b82f6; }
+    .toast.warning { background-color: #f59e0b; }
+    html.dark .toast {
+      color: #f9fafb;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+    }
+    html.dark .toast.success { background-color: #059669; }
+    html.dark .toast.error { background-color: #dc2626; }
+    html.dark .toast.info { background-color: #2563eb; }
+    html.dark .toast.warning { background-color: #d97706; }
+    
+    /* 通知渠道：仅顶部分隔线，避免与外层白卡片形成双层圆角框 */
+    .notifier-config {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+    }
+    .notifier-config.active {
+      opacity: 1;
+      border-top-color: #c7d2fe;
+    }
+    .notifier-config.inactive {
+      opacity: 0.55;
+    }
+    html.dark .notifier-config {
+      border-top-color: #374151;
+    }
+    html.dark .notifier-config.active {
+      border-top-color: #818cf8;
+    }
+    html.dark .notifier-config.inactive {
+      opacity: 0.5;
+    }
+    html.dark .bg-indigo-50 {
+        background-color: rgba(55, 65, 81, 0.5) !important; /* 深灰色带透明 */
+        border-color: #4b5563 !important;
+    }
+    html.dark .text-indigo-700 {
+        color: #a5b4fc !important; /* 浅靛蓝 */
+    }

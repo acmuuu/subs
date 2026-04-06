@@ -1,0 +1,27 @@
+
+    .login-container {
+      min-height: 100vh;
+    }
+    .login-box {
+      backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+    .input-field {
+      transition: all 0.3s;
+      border: 1px solid #e2e8f0;
+    }
+    .input-field:focus {
+      border-color: #B8860B;
+      box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.22);
+    }
+    html.dark .login-container {
+      background: linear-gradient(135deg, #3b4cc4 0%, #4a2b6b 100%);
+    }
+    html.dark .login-box {
+      background-color: rgba(17, 24, 39, 0.95);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    }
+    html.dark .login-box .text-gray-800 { color: #f3f4f6; }
+    html.dark .login-box .text-gray-600,
+    html.dark .login-box .text-gray-700 { color: #cbd5e1; }
