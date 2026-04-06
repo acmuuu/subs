@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="/css/dashboard.css">
   ${themeResources}
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-100 min-h-screen">
   <nav class="bg-white shadow-md relative z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-14">
@@ -76,19 +76,6 @@
       <p class="text-sm text-gray-500 mt-1">订阅费用和活动概览（统计金额已折合为 CNY）</p>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
-      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <i class="fas fa-history text-indigo-500"></i>
-          <h3 class="text-lg font-medium text-gray-900">自动提醒任务状态</h3>
-        </div>
-        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Cron 可观测性</span>
-      </div>
-      <div class="px-2 py-3 sm:px-3 sm:py-4" id="schedulerStatus">
-        <div class="loading-skeleton"></div>
-      </div>
-    </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3" id="statsGrid">
       <div class="loading-skeleton"></div>
       <div class="loading-skeleton"></div>
@@ -104,6 +91,47 @@
         <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">过去7天</span>
       </div>
       <div class="px-2 py-3 sm:px-3 sm:py-4" id="recentPayments">
+        <div class="loading-skeleton"></div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-chart-bar text-purple-500"></i>
+            <h3 class="text-lg font-medium text-gray-900">按类型支出排行</h3>
+          </div>
+          <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
+        </div>
+        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByType">
+          <div class="loading-skeleton"></div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <i class="fas fa-folder text-green-500"></i>
+            <h3 class="text-lg font-medium text-gray-900">按分类支出统计</h3>
+          </div>
+          <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
+        </div>
+        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByCategory">
+          <div class="loading-skeleton"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md overflow-hidden mb-3">
+      <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-history text-indigo-500"></i>
+          <h3 class="text-lg font-medium text-gray-900">自动提醒任务状态</h3>
+        </div>
+        <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">Cron 可观测性</span>
+      </div>
+      <div class="px-2 py-3 sm:px-3 sm:py-4" id="schedulerStatus">
         <div class="loading-skeleton"></div>
       </div>
     </div>
@@ -130,34 +158,6 @@
       </div>
       <div class="px-2 py-3 sm:px-3 sm:py-4" id="schedulerStatusHistory">
         <div class="loading-skeleton"></div>
-      </div>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i class="fas fa-chart-bar text-purple-500"></i>
-            <h3 class="text-lg font-medium text-gray-900">按类型支出排行</h3>
-          </div>
-          <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
-        </div>
-        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByType">
-          <div class="loading-skeleton"></div>
-        </div>
-      </div>
-
-      <div class="bg-white rounded-lg shadow-md overflow-hidden">
-        <div class="px-2 sm:px-3 py-3 border-b border-gray-200 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <i class="fas fa-folder text-green-500"></i>
-            <h3 class="text-lg font-medium text-gray-900">按分类支出统计</h3>
-          </div>
-          <span class="px-3 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">年度统计 (折合CNY)</span>
-        </div>
-        <div class="px-2 py-3 sm:px-3 sm:py-4" id="expenseByCategory">
-          <div class="loading-skeleton"></div>
-        </div>
       </div>
     </div>
   </div>
