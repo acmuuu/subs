@@ -19,6 +19,7 @@ async function handleDebug(request, env) {
 <html>
 <head>
   <title>调试信息</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <style>
     body { font-family: monospace; padding: 20px; background: #f5f5f5; }
     .info { background: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
