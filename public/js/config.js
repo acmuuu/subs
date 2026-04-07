@@ -174,6 +174,33 @@
       });
     }
 
+    const NOTIFIER_TAB_ORDER = ['telegram', 'notifyx', 'webhook', 'wechatbot', 'email', 'bark', 'gotify'];
+    let activeNotifierTab = 'notifyx';
+
+    function selectNotifierTab(type) {
+      if (NOTIFIER_TAB_ORDER.indexOf(type) === -1) return;
+      activeNotifierTab = type;
+      NOTIFIER_TAB_ORDER.forEach(function (t) {
+        const tabBtn = document.getElementById('notifier-tab-' + t);
+        const panel = document.getElementById('notifier-panel-' + t);
+        const selected = t === type;
+        if (tabBtn) {
+          tabBtn.setAttribute('aria-selected', selected ? 'true' : 'false');
+          tabBtn.classList.toggle('notifier-tab-active', selected);
+          tabBtn.tabIndex = selected ? 0 : -1;
+        }
+        if (panel) {
+          panel.classList.toggle('hidden', !selected);
+        }
+      });
+    }
+
+    function initNotifierTabsSelection(enabledNotifiers) {
+      const list = (enabledNotifiers && enabledNotifiers.length) ? enabledNotifiers : ['notifyx'];
+      const pick = NOTIFIER_TAB_ORDER.find(function (t) { return list.indexOf(t) !== -1; }) || list[0] || 'notifyx';
+      selectNotifierTab(pick);
+    }
+
     async function loadConfig() {
       try {
         const response = await fetch('/api/config');
@@ -246,9 +273,11 @@
         });
 
         toggleNotificationConfigs(enabledNotifiers);
+        initNotifierTabsSelection(enabledNotifiers);
       } catch (error) {
         console.error('加载配置失败:', error);
         showToast('加载配置失败，请刷新页面重试', 'error');
+        initNotifierTabsSelection(['notifyx']);
       }
     }
     
@@ -413,7 +442,7 @@
           localStorage.setItem('timezoneUpdated', Date.now().toString());
           
           // 如果当前在订阅列表页面，则自动刷新页面以更新时区显示
-          if (window.location.pathname === '/admin/list') {
+          if (window.location.pathname === '/list') {
             window.location.reload();
           }
         } else {
@@ -594,6 +623,16 @@
       wireClearSecretButton('clearGotifyAppToken', 'gotifyAppToken', 'GOTIFY_APP_TOKEN');
 
       initThemeAndTimezoneDropdowns();
+
+      document.querySelectorAll('.notifier-tab-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          const type = btn.getAttribute('data-notifier');
+          if (!type) return;
+          selectNotifierTab(type);
+        });
+      });
+
+      initNotifierTabsSelection(['notifyx']);
       loadConfig();
     });
     

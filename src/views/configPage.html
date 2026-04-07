@@ -18,7 +18,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-14">
         <div class="flex items-center shrink-0">
-          <a href="/admin/dashboard" class="flex items-center rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 no-underline hover:opacity-90 transition-opacity" aria-label="订阅管理系统，前往仪表盘">
+          <a href="/dashboard" class="flex items-center rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 no-underline hover:opacity-90 transition-opacity" aria-label="订阅管理系统，前往仪表盘">
             <i class="fas fa-calendar-check text-indigo-600 text-2xl mr-2"></i>
             <span class="font-bold text-xl text-gray-800">订阅管理系统</span>
           </a>
@@ -28,19 +28,19 @@
         </div>
           
         <div class="hidden md:flex items-center space-x-4 ml-auto">
-          <a href="/admin/dashboard" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/dashboard" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-chart-line mr-1"></i>仪表盘
           </a>
-          <a href="/admin/list" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/list" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-list mr-1"></i>订阅列表
           </a>
-          <a href="/admin/new" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/new" class="text-gray-700 hover:text-gray-900 border-b-2 border-transparent hover:border-gray-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-plus mr-1"></i>添加订阅
           </a>
-          <a href="/admin/config" class="text-indigo-600 border-b-2 border-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/config" class="text-indigo-600 border-b-2 border-indigo-600 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-cog mr-1"></i>系统配置
           </a>
-          <a href="/api/logout" class="text-gray-700 hover:text-red-600 border-b-2 border-transparent hover:border-red-300 px-3 py-2 rounded-md text-sm font-medium transition">
+          <a href="/logout" class="text-gray-700 hover:text-red-600 border-b-2 border-transparent hover:border-red-300 px-3 py-2 rounded-md text-sm font-medium transition">
             <i class="fas fa-sign-out-alt mr-1"></i>退出登录
           </a>
         </div>
@@ -58,19 +58,19 @@
         <div id="mobileTimeDisplay" class="px-3 py-2.5 text-sm font-medium text-indigo-600 text-left border-b border-gray-100 mb-2 leading-snug flex flex-wrap items-baseline gap-x-2" aria-live="polite">
           <span class="nav-clock-time"></span><span class="nav-clock-tz"></span>
         </div>
-        <a href="/admin/dashboard" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
+        <a href="/dashboard" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-chart-line w-6 text-center mr-2"></i>仪表盘
         </a>
-        <a href="/admin/list" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
+        <a href="/list" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-list w-6 text-center mr-2"></i>订阅列表
         </a>
-        <a href="/admin/new" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
+        <a href="/new" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-plus w-6 text-center mr-2"></i>添加订阅
         </a>
-        <a href="/admin/config" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
+        <a href="/config" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-cog w-6 text-center mr-2"></i>系统配置
         </a>
-        <a href="/api/logout" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 active:bg-red-100 transition-colors">
+        <a href="/logout" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-red-50 hover:text-red-600 active:bg-red-100 transition-colors">
           <i class="fas fa-sign-out-alt w-6 text-center mr-2"></i>退出登录
         </a>
       </div>
@@ -159,7 +159,41 @@
               <p class="mt-1">若 Cron 已设置为每小时执行，可用该字段限制实际发送提醒的小时段。</p>
             </div>
           </div>
+
           <div class="mb-3">
+            <label for="thirdPartyToken" class="block text-sm font-medium text-gray-700">第三方 API 访问令牌</label>
+            <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
+              <input type="text" id="thirdPartyToken" placeholder="留空表示不修改；输入新值将更新"
+                class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <button type="button" id="generateThirdPartyToken" class="btn-info text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
+                <i class="fas fa-magic mr-2"></i>生成令牌
+              </button>
+              <button type="button" id="clearThirdPartyToken" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
+                <i class="fas fa-eraser mr-2"></i>清空
+              </button>
+            </div>
+            <p id="THIRD_PARTY_API_TOKENStatus" class="mt-1 text-xs text-gray-500">加载中...</p>
+            <p class="mt-1 text-sm text-gray-500">调用 /api/notify/{token} 接口时需携带此令牌；留空表示禁用第三方 API 推送。</p>
+          </div>
+
+          <div class="mb-3">
+            <label class="block text-sm font-medium text-gray-700 mb-3">调试设置</label>
+            <label class="inline-flex items-center cursor-pointer select-none">
+              <input type="checkbox" id="debugLogs" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
+              <span class="ml-2 text-sm text-gray-700">开启调试日志（影响控制台输出）</span>
+            </label>
+          </div>
+
+          <div class="mb-3">
+            <label for="paymentHistoryLimit" class="block text-sm font-medium text-gray-700">支付历史保留条数</label>
+            <input type="number" id="paymentHistoryLimit" min="10" max="1000" step="1"
+              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              placeholder="默认 100">
+            <p class="mt-1 text-sm text-gray-500">自动续订与手动续订后仅保留最近 N 条支付历史（建议 50~200，默认 100）。</p>
+          </div>
+
+          <div class="notifier-channels-group rounded-lg border border-gray-200 overflow-hidden bg-white shadow-sm mt-4">
+          <div class="px-3 py-4 sm:px-4 border-b border-gray-200 bg-gray-50">
             <label class="block text-sm font-medium text-gray-700 mb-3">通知方式（可多选）</label>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label class="inline-flex items-center">
@@ -210,39 +244,41 @@
             </div>
           </div>
 
-          <div class="mb-3">
-            <label for="thirdPartyToken" class="block text-sm font-medium text-gray-700">第三方 API 访问令牌</label>
-            <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-              <input type="text" id="thirdPartyToken" placeholder="留空表示不修改；输入新值将更新"
-                class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-              <button type="button" id="generateThirdPartyToken" class="btn-info text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
-                <i class="fas fa-magic mr-2"></i>生成令牌
+          <div class="notifier-channel-tabs">
+            <p class="text-sm font-medium text-gray-700 px-3 pt-3 pb-2 sm:px-4">各渠道详细配置</p>
+            <div class="flex flex-wrap gap-1 border-b border-gray-200 -mb-px overflow-x-auto pb-px px-3 sm:px-4" role="tablist" aria-label="通知渠道配置">
+              <button type="button" role="tab" id="notifier-tab-telegram" data-notifier="telegram" aria-selected="false" aria-controls="notifier-panel-telegram" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                <i class="fa-brands fa-telegram mr-1" aria-hidden="true"></i>Telegram
               </button>
-              <button type="button" id="clearThirdPartyToken" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
-                <i class="fas fa-eraser mr-2"></i>清空
+              <button type="button" role="tab" id="notifier-tab-notifyx" data-notifier="notifyx" aria-selected="false" aria-controls="notifier-panel-notifyx" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                NotifyX
+              </button>
+              <button type="button" role="tab" id="notifier-tab-webhook" data-notifier="webhook" aria-selected="false" aria-controls="notifier-panel-webhook" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                Webhook
+              </button>
+              <button type="button" role="tab" id="notifier-tab-wechatbot" data-notifier="wechatbot" aria-selected="false" aria-controls="notifier-panel-wechatbot" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                企业微信
+              </button>
+              <button type="button" role="tab" id="notifier-tab-email" data-notifier="email" aria-selected="false" aria-controls="notifier-panel-email" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                邮件
+              </button>
+              <button type="button" role="tab" id="notifier-tab-bark" data-notifier="bark" aria-selected="false" aria-controls="notifier-panel-bark" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                Bark
+              </button>
+              <button type="button" role="tab" id="notifier-tab-gotify" data-notifier="gotify" aria-selected="false" aria-controls="notifier-panel-gotify" tabindex="-1"
+                class="notifier-tab-btn px-3 py-2 text-sm font-medium rounded-t-md border-b-2 border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50 whitespace-nowrap transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1">
+                Gotify
               </button>
             </div>
-            <p id="THIRD_PARTY_API_TOKENStatus" class="mt-1 text-xs text-gray-500">加载中...</p>
-            <p class="mt-1 text-sm text-gray-500">调用 /api/notify/{token} 接口时需携带此令牌；留空表示禁用第三方 API 推送。</p>
-          </div>
-
-          <div class="mb-3">
-            <label class="block text-sm font-medium text-gray-700 mb-3">调试设置</label>
-            <label class="inline-flex items-center cursor-pointer select-none">
-              <input type="checkbox" id="debugLogs" class="form-checkbox h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500">
-              <span class="ml-2 text-sm text-gray-700">开启调试日志（影响控制台输出）</span>
-            </label>
-          </div>
-
-          <div class="mb-3">
-            <label for="paymentHistoryLimit" class="block text-sm font-medium text-gray-700">支付历史保留条数</label>
-            <input type="number" id="paymentHistoryLimit" min="10" max="1000" step="1"
-              class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="默认 100">
-            <p class="mt-1 text-sm text-gray-500">自动续订与手动续订后仅保留最近 N 条支付历史（建议 50~200，默认 100）。</p>
-          </div>
-          
-          <div id="telegramConfig" class="notifier-config">
+            <div class="notifier-tab-panels px-3 py-4 sm:px-4 bg-white">
+          <div id="notifier-panel-telegram" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-telegram">
+          <div id="telegramConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">Telegram 配置</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
               <div>
@@ -266,8 +302,10 @@
               </button>
             </div>
           </div>
+          </div>
           
-          <div id="notifyxConfig" class="notifier-config">
+          <div id="notifier-panel-notifyx" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-notifyx">
+          <div id="notifyxConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">NotifyX 配置</h4>
             <div class="mb-3">
               <label for="notifyxApiKey" class="block text-sm font-medium text-gray-700">API Key</label>
@@ -286,8 +324,10 @@
               </button>
             </div>
           </div>
+          </div>
 
-          <div id="webhookConfig" class="notifier-config">
+          <div id="notifier-panel-webhook" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-webhook">
+          <div id="webhookConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">Webhook 通知 配置</h4>
             <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
@@ -335,8 +375,10 @@
               </button>
             </div>
           </div>
+          </div>
 
-          <div id="wechatbotConfig" class="notifier-config">
+          <div id="notifier-panel-wechatbot" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-wechatbot">
+          <div id="wechatbotConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">企业微信机器人 配置</h4>
             <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
@@ -380,8 +422,10 @@
               </button>
             </div>
           </div>
+          </div>
 
-          <div id="emailConfig" class="notifier-config">
+          <div id="notifier-panel-email" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-email">
+          <div id="emailConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">邮件通知 配置</h4>
             <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
@@ -417,8 +461,10 @@
               </button>
             </div>
           </div>
+          </div>
 
-          <div id="barkConfig" class="notifier-config">
+          <div id="notifier-panel-bark" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-bark">
+          <div id="barkConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">Bark 配置</h4>
             <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
@@ -452,8 +498,10 @@
               </button>
             </div>
           </div>
+          </div>
 
-          <div id="gotifyConfig" class="notifier-config">
+          <div id="notifier-panel-gotify" class="notifier-tab-panel hidden" role="tabpanel" aria-labelledby="notifier-tab-gotify">
+          <div id="gotifyConfig" class="notifier-config border-t-0 pt-0 mt-0">
             <h4 class="text-md font-medium text-gray-900 mb-3">Gotify 配置</h4>
             <div class="grid grid-cols-1 gap-4 mb-3">
               <div>
@@ -475,6 +523,10 @@
                 <i class="fas fa-paper-plane mr-2"></i>测试 Gotify 通知
               </button>
             </div>
+          </div>
+          </div>
+            </div>
+          </div>
           </div>
         </div>
 

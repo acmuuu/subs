@@ -19,7 +19,7 @@
         const result = await response.json();
         
         if (result.success) {
-          window.location.href = '/admin/list';
+          window.location.href = '/dashboard';
         } else {
           document.getElementById('errorMsg').textContent = result.message || '用户名或密码错误';
           button.innerHTML = originalContent;

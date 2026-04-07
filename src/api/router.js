@@ -1,4 +1,4 @@
-import { handleLogin, handleLogout, getUserFromRequest } from './handlers/auth.js';
+import { handleLogin, getUserFromRequest } from './handlers/auth.js';
 import { handleGetConfig, handleUpdateConfig } from './handlers/config.js';
 import { handleDashboardStats } from './handlers/dashboard.js';
 import { handleThirdPartyNotify } from './handlers/notify.js';
@@ -15,10 +15,6 @@ async function handleApiRequest(request, env) {
 
   if (path === '/login' && method === 'POST') {
     return handleLogin(request, env);
-  }
-
-  if (path === '/logout' && (method === 'GET' || method === 'POST')) {
-    return handleLogout();
   }
 
   const { user } = await getUserFromRequest(request, env);

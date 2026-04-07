@@ -30,7 +30,7 @@ function handleLogout() {
   return new Response('', {
     status: 302,
     headers: {
-      'Location': '/',
+      'Location': '/login',
       'Set-Cookie': 'token=; HttpOnly; Path=/; SameSite=Strict; Max-Age=0'
     }
   });

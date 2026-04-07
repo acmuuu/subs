@@ -1,9 +1,9 @@
 import { handleApiRequest } from './api/router.js';
 import { handleAdminRequest, handleLoginPage } from './api/admin.js';
+import { handleLogout, getUserFromRequest } from './api/handlers/auth.js';
 import { handleDebug } from './api/debug.js';
 import { getCurrentTimeInTimezone } from './core/time.js';
 import { checkExpiringSubscriptions } from './services/scheduler.js';
-import { getUserFromRequest } from './api/handlers/auth.js';
 
 export default {
   async fetch(request, env, ctx) {
@@ -22,7 +22,9 @@ export default {
       }
     }
 
-    if (url.pathname === '/debug') {
+    const pathname = url.pathname;
+
+    if (pathname === '/debug') {
       // 调试页必须登录后才能访问，避免泄露系统信息
       const { user } = await getUserFromRequest(request, env);
       if (!user) {
@@ -32,13 +34,45 @@ export default {
         });
       }
       return handleDebug(request, env);
-    } else if (url.pathname.startsWith('/api')) {
-      return handleApiRequest(request, env);
-    } else if (url.pathname.startsWith('/admin')) {
-      return handleAdminRequest(request, env, ctx);
-    } else {
+    }
+
+    if (pathname === '/' || pathname === '') {
+      return new Response('', {
+        status: 302,
+        headers: { Location: '/dashboard' + url.search }
+      });
+    }
+
+    if (pathname === '/login' || pathname === '/login/') {
+      const { user } = await getUserFromRequest(request, env);
+      if (user) {
+        return new Response('', {
+          status: 302,
+          headers: { Location: '/dashboard' + url.search }
+        });
+      }
       return handleLoginPage();
     }
+
+    if (pathname === '/logout' || pathname === '/logout/') {
+      if (request.method === 'GET' || request.method === 'POST') {
+        return handleLogout();
+      }
+      return new Response('Method Not Allowed', { status: 405 });
+    }
+
+    const appPaths = new Set(['/dashboard', '/list', '/new', '/config']);
+    const normalized =
+      pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+    if (appPaths.has(normalized)) {
+      return handleAdminRequest(request, env, ctx);
+    }
+
+    if (pathname.startsWith('/api')) {
+      return handleApiRequest(request, env);
+    }
+
+    return handleLoginPage();
   },
 
   async scheduled(event, env, ctx) {

@@ -3,7 +3,7 @@ main = "src/index.js"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
 
-# 静态资源（favicon 等）；run_worker_first 保证 /api、/admin 仍由 Worker 处理
+# 静态资源（favicon 等）；run_worker_first 保证 /api、应用页面等仍由 Worker 处理
 [assets]
 directory = "./public"
 binding = "ASSETS"

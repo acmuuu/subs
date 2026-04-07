@@ -22,44 +22,40 @@ async function handleAdminRequest(request, env) {
       console.log('[管理页面] 用户未登录，重定向到登录页面');
       return new Response('', {
         status: 302,
-        headers: { 'Location': '/' }
+        headers: { Location: '/login' + url.search }
       });
     }
 
-    if (pathname === '/admin/config') {
+    const normalized =
+      pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+
+    if (normalized === '/config') {
       return new Response(configPage, {
         headers: { 'Content-Type': 'text/html; charset=utf-8' }
       });
     }
 
-    if (pathname === '/admin/dashboard') {
+    if (normalized === '/dashboard') {
       return new Response(dashboardPage(), {
         headers: { 'Content-Type': 'text/html; charset=utf-8' }
       });
     }
 
-    if (pathname === '/admin/new') {
+    if (normalized === '/new') {
       return new Response(newSubscriptionPage, {
         headers: { 'Content-Type': 'text/html; charset=utf-8' }
       });
     }
 
-    if (pathname === '/admin/list' || pathname === '/admin/list/') {
+    if (normalized === '/list') {
       return new Response(adminPage, {
         headers: { 'Content-Type': 'text/html; charset=utf-8' }
       });
     }
 
-    if (pathname === '/admin' || pathname === '/admin/') {
-      return new Response('', {
-        status: 302,
-        headers: { Location: '/admin/list' + url.search }
-      });
-    }
-
     return new Response('', {
       status: 302,
-      headers: { Location: '/admin/list' + url.search }
+      headers: { Location: '/dashboard' + url.search }
     });
   } catch (error) {
     console.error('[管理页面] 处理请求时出错:', error);

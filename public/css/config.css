@@ -53,6 +53,27 @@
     html.dark .toast.warning { background-color: #d97706; }
     
     /* 通知渠道：仅顶部分隔线，避免与外层白卡片形成双层圆角框 */
+    .notifier-tab-btn.notifier-tab-active {
+      border-bottom-color: #4f46e5;
+      color: #4f46e5;
+      background-color: #eef2ff;
+    }
+    html.dark .notifier-tab-btn.notifier-tab-active {
+      border-bottom-color: #818cf8;
+      color: #a5b4fc;
+      background-color: rgba(67, 56, 202, 0.2);
+    }
+
+    html.dark .notifier-channels-group {
+      border-color: #374151;
+      background-color: #1f2937;
+      box-shadow: none;
+    }
+    html.dark .notifier-channels-group > div:first-child {
+      border-color: #374151;
+      background-color: rgba(17, 24, 39, 0.6);
+    }
+
     .notifier-config {
       margin-top: 1rem;
       padding-top: 1rem;

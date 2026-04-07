@@ -22,7 +22,8 @@
     });
 
     window.addEventListener('load', async () => {
-      if (window.location.pathname.startsWith('/admin')) {
+      const p = window.location.pathname.replace(/\/$/, '') || '/';
+      if (['/dashboard', '/list', '/new', '/config'].indexOf(p) !== -1) {
         try {
           const res = await fetch('/api/config');
           const config = await res.json();
