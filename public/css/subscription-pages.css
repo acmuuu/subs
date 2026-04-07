@@ -1,3 +1,4 @@
+/* 订阅列表 /list 与新建订阅 /new 共用样式 */
 
     .table-container { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
     .modal-container { backdrop-filter: blur(8px); }
@@ -169,14 +170,14 @@
       justify-content: center;
       width: 100%; 
       height: auto;
-      aspect-ratio: 1; /* 近似正方形，比 0.85 更矮 */
+      aspect-ratio: 1.2; /* 近似正方形，比 0.85 更矮 */
       min-height: 32px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s ease;
       position: relative;
       padding: 1px;
-      font-size: 12px;
+      font-size: 15px;
     }
     /* 【新增】自定义下拉菜单样式 (用于替代 datalist) */
     .custom-dropdown-wrapper {
