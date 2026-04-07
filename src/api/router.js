@@ -17,6 +17,10 @@ async function handleApiRequest(request, env) {
     return handleLogin(request, env);
   }
 
+  // 第三方推送：凭路径/Header/Query 中的令牌鉴权，不要求管理后台登录会话
+  const thirdPartyNotifyResponse = await handleThirdPartyNotify(request, env, config, url);
+  if (thirdPartyNotifyResponse) return thirdPartyNotifyResponse;
+
   const { user } = await getUserFromRequest(request, env);
   if (!user && path !== '/login') {
     return new Response(
@@ -40,9 +44,6 @@ async function handleApiRequest(request, env) {
 
   const subscriptionResponse = await handleSubscriptions(request, env, path);
   if (subscriptionResponse) return subscriptionResponse;
-
-  const thirdPartyResponse = await handleThirdPartyNotify(request, env, config, url);
-  if (thirdPartyResponse) return thirdPartyResponse;
 
   return new Response(
     JSON.stringify({ success: false, message: '未找到请求的资源' }),

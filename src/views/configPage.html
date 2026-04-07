@@ -97,7 +97,7 @@
             </div>
             <div>
               <label for="adminPassword" class="block text-sm font-medium text-gray-700">密码</label>
-              <input type="password" id="adminPassword" placeholder="如不修改密码，请留空" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <input type="password" id="adminPassword" placeholder="如不修改密码，请留空" autocomplete="new-password" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <p class="mt-1 text-sm text-gray-500">留空表示不修改当前密码</p>
             </div>
           </div>
@@ -163,8 +163,8 @@
           <div class="mb-3">
             <label for="thirdPartyToken" class="block text-sm font-medium text-gray-700">第三方 API 访问令牌</label>
             <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-              <input type="text" id="thirdPartyToken" placeholder="留空表示不修改；输入新值将更新"
-                class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+              <input type="text" id="thirdPartyToken" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore
+                class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
               <button type="button" id="generateThirdPartyToken" class="btn-info text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                 <i class="fas fa-magic mr-2"></i>生成令牌
               </button>
@@ -284,7 +284,7 @@
               <div>
                 <label for="tgBotToken" class="block text-sm font-medium text-gray-700">Bot Token</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                  <input type="text" id="tgBotToken" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <input type="text" id="tgBotToken" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <button type="button" id="clearTgBotToken" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -310,7 +310,7 @@
             <div class="mb-3">
               <label for="notifyxApiKey" class="block text-sm font-medium text-gray-700">API Key</label>
               <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                <input type="text" id="notifyxApiKey" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" id="notifyxApiKey" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <button type="button" id="clearNotifyxApiKey" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                   <i class="fas fa-eraser mr-2"></i>清空
                 </button>
@@ -333,7 +333,7 @@
               <div>
                 <label for="webhookUrl" class="block text-sm font-medium text-gray-700">Webhook 通知 URL</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                  <input type="url" id="webhookUrl" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <input type="url" id="webhookUrl" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <button type="button" id="clearWebhookUrl" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -355,7 +355,7 @@
               <div>
                 <label for="webhookHeaders" class="block text-sm font-medium text-gray-700">自定义请求头 (JSON格式，可选)</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-start gap-3">
-                  <textarea id="webhookHeaders" rows="3" placeholder='留空表示不修改；输入新值将更新' class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+                  <textarea id="webhookHeaders" rows="3" placeholder='留空表示不修改；输入新值将更新' autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
                   <button type="button" id="clearWebhookHeaders" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -384,7 +384,7 @@
               <div>
                 <label for="wechatbotWebhook" class="block text-sm font-medium text-gray-700">机器人 Webhook URL</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                  <input type="url" id="wechatbotWebhook" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <input type="url" id="wechatbotWebhook" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <button type="button" id="clearWechatbotWebhook" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -431,7 +431,7 @@
               <div>
                 <label for="resendApiKey" class="block text-sm font-medium text-gray-700">Resend API Key</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                  <input type="text" id="resendApiKey" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <input type="text" id="resendApiKey" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <button type="button" id="clearResendApiKey" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -475,7 +475,7 @@
               <div>
                 <label for="barkDeviceKey" class="block text-sm font-medium text-gray-700">设备Key</label>
                 <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                  <input type="text" id="barkDeviceKey" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                  <input type="text" id="barkDeviceKey" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <button type="button" id="clearBarkDeviceKey" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                     <i class="fas fa-eraser mr-2"></i>清空
                   </button>
@@ -511,7 +511,7 @@
               </div>
               <label for="gotifyAppToken" class="block text-sm font-medium text-gray-700">Application Token</label>
               <div class="mt-1 flex flex-col sm:flex-row sm:items-center gap-3">
-                <input type="text" id="gotifyAppToken" placeholder="留空表示不修改；输入新值将更新" class="flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <input type="text" id="gotifyAppToken" placeholder="留空表示不修改；输入新值将更新" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="off" data-lpignore="true" data-1p-ignore data-bwignore class="secret-config-input flex-1 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                 <button type="button" id="clearGotifyAppToken" class="btn-warning text-white px-4 py-2 rounded-md text-sm font-medium whitespace-nowrap">
                   <i class="fas fa-eraser mr-2"></i>清空
                 </button>

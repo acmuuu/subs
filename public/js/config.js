@@ -174,6 +174,21 @@
       });
     }
 
+    /** 抑制浏览器对密钥类输入框的自动填充与历史下拉；pointerdown/focus 时解除只读。可重复调用以在重新加载配置后再次加锁。 */
+    function initSecretInputsNoBrowserHistory() {
+      document.querySelectorAll('.secret-config-input').forEach((el) => {
+        function unlock() {
+          el.readOnly = false;
+          el.removeAttribute('readonly');
+        }
+        el.setAttribute('readonly', 'readonly');
+        if (el.dataset.secretReadonlyBound === 'true') return;
+        el.dataset.secretReadonlyBound = 'true';
+        el.addEventListener('pointerdown', unlock, { capture: true });
+        el.addEventListener('focus', unlock);
+      });
+    }
+
     const NOTIFIER_TAB_ORDER = ['telegram', 'notifyx', 'webhook', 'wechatbot', 'email', 'bark', 'gotify'];
     let activeNotifierTab = 'notifyx';
 
@@ -433,6 +448,9 @@
             window.updateAppTheme(config.THEME_MODE);
           }
           passwordField.value = '';
+          // 重新拉取配置，更新各密钥「已配置/未配置」状态（GET 仍不会下发真实密钥）
+          await loadConfig();
+          initSecretInputsNoBrowserHistory();
           
           // 前端始终显示浏览器本地时区
           globalTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
@@ -621,6 +639,8 @@
       wireClearSecretButton('clearBarkDeviceKey', 'barkDeviceKey', 'BARK_DEVICE_KEY');
       wireClearSecretButton('clearThirdPartyToken', 'thirdPartyToken', 'THIRD_PARTY_API_TOKEN');
       wireClearSecretButton('clearGotifyAppToken', 'gotifyAppToken', 'GOTIFY_APP_TOKEN');
+
+      initSecretInputsNoBrowserHistory();
 
       initThemeAndTimezoneDropdowns();
 
