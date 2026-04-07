@@ -434,13 +434,115 @@ const lunarBiz = {
         .filter(token => token.length > 0);
     }
 
+    const MODE_FILTER_ENTRIES = [
+      { value: '', label: '全部模式' },
+      { value: 'cycle', label: '循环订阅' },
+      { value: 'reset', label: '到期重置' }
+    ];
+
+    const CURRENCY_ENTRIES = [
+      { value: 'CNY', label: 'CNY (¥)' },
+      { value: 'USD', label: 'USD ($)' },
+      { value: 'HKD', label: 'HKD (HK$)' },
+      { value: 'TWD', label: 'TWD (NT$)' },
+      { value: 'JPY', label: 'JPY (¥)' },
+      { value: 'EUR', label: 'EUR (€)' },
+      { value: 'GBP', label: 'GBP (£)' },
+      { value: 'KRW', label: 'KRW (₩)' },
+      { value: 'TRY', label: 'TRY (₺)' }
+    ];
+
+    const PERIOD_UNIT_ENTRIES = [
+      { value: 'day', label: '天' },
+      { value: 'month', label: '月' },
+      { value: 'year', label: '年' }
+    ];
+
+    const REMINDER_UNIT_ENTRIES = [
+      { value: 'day', label: '天' },
+      { value: 'hour', label: '小时' }
+    ];
+
+    function escapeDropdownAttr(s) {
+      return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;');
+    }
+
+    function renderValueDropdownItems(list, entries) {
+      list.innerHTML = entries.map(e =>
+        '<div class="dropdown-item" data-value="' + escapeDropdownAttr(e.value) + '">' + escapeDropdownAttr(e.label) + '</div>'
+      ).join('');
+      list._valueEntries = entries;
+    }
+
+    function setHiddenAndDisplay(hidden, display, entries, value) {
+      const match = entries.find(e => e.value === value);
+      if (hidden) hidden.value = value;
+      if (display) display.value = match ? match.label : '';
+    }
+
+    function initValueDropdown(displayId, listId, hiddenId, entries, options) {
+      const display = document.getElementById(displayId);
+      const list = document.getElementById(listId);
+      const hidden = document.getElementById(hiddenId);
+      if (!display || !list || !hidden) return;
+
+      renderValueDropdownItems(list, entries);
+      setHiddenAndDisplay(hidden, display, entries, hidden.value);
+      if (options && options.readonly === false) {
+        display.readOnly = false;
+      } else {
+        display.readOnly = true;
+      }
+
+      if (!display.dataset.valueDropdownBound) {
+        display.dataset.valueDropdownBound = 'true';
+        const showList = (e) => {
+          e.stopPropagation();
+          document.querySelectorAll('.custom-dropdown-list').forEach(el => el.classList.remove('show'));
+          list.classList.add('show');
+        };
+        display.addEventListener('focus', showList);
+        display.addEventListener('click', showList);
+
+        list.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const item = e.target.closest('.dropdown-item');
+          if (!item) return;
+          const value = item.getAttribute('data-value');
+          const label = item.textContent;
+          hidden.value = value;
+          display.value = label;
+          display.dispatchEvent(new Event('input', { bubbles: true }));
+          hidden.dispatchEvent(new Event('change', { bubbles: true }));
+          list.classList.remove('show');
+          if (options && typeof options.onSelect === 'function') options.onSelect(value);
+        });
+      }
+    }
+
+    function initListFilterDropdowns() {
+      if (!document.getElementById('subscriptionsBody')) return;
+      if (document.getElementById('modeFilterDisplay')) {
+        initValueDropdown('modeFilterDisplay', 'modeFilterDropdown', 'modeFilter', MODE_FILTER_ENTRIES);
+      }
+      if (document.getElementById('categoryFilterDisplay')) {
+        initValueDropdown('categoryFilterDisplay', 'categoryFilterDropdown', 'categoryFilter', [{ value: '', label: '全部分类' }]);
+      }
+    }
+
     function populateCategoryFilter(subscriptions) {
-      const select = document.getElementById('categoryFilter');
-      if (!select) {
+      const hidden = document.getElementById('categoryFilter');
+      const display = document.getElementById('categoryFilterDisplay');
+      const list = document.getElementById('categoryFilterDropdown');
+      if (!hidden || !display || !list) {
         return;
       }
 
-      const previousValue = select.value;
+      const previousValue = hidden.value;
       const categories = new Set();
 
       (subscriptions || []).forEach(subscription => {
@@ -448,25 +550,15 @@ const lunarBiz = {
       });
 
       const sorted = Array.from(categories).sort((a, b) => a.localeCompare(b, 'zh-CN'));
-      select.innerHTML = '';
+      const entries = [{ value: '', label: '全部分类' }].concat(sorted.map(c => ({ value: c, label: c })));
 
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.textContent = '全部分类';
-      select.appendChild(defaultOption);
+      renderValueDropdownItems(list, entries);
 
-      sorted.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat;
-        option.textContent = cat;
-        select.appendChild(option);
-      });
-
-      if (previousValue && sorted.map(item => item.toLowerCase()).includes(previousValue.toLowerCase())) {
-        select.value = previousValue;
-      } else {
-        select.value = '';
+      let nextVal = '';
+      if (previousValue && sorted.some(c => c.toLowerCase() === previousValue.toLowerCase())) {
+        nextVal = sorted.find(c => c.toLowerCase() === previousValue.toLowerCase()) || '';
       }
+      setHiddenAndDisplay(hidden, display, entries, nextVal);
     }
 
     function getReminderSettings(subscription) {
@@ -580,10 +672,10 @@ const lunarBiz = {
       const showLunar = listShowLunar ? listShowLunar.checked : false;
       const searchInput = document.getElementById('searchKeyword');
       const keyword = searchInput ? searchInput.value.trim().toLowerCase() : '';
-      const categorySelect = document.getElementById('categoryFilter');
-      const selectedCategory = categorySelect ? categorySelect.value.trim().toLowerCase() : '';
-      const modeSelect = document.getElementById('modeFilter');
-      const selectedMode = modeSelect ? modeSelect.value : '';
+      const categoryFilterHidden = document.getElementById('categoryFilter');
+      const selectedCategory = categoryFilterHidden ? categoryFilterHidden.value.trim().toLowerCase() : '';
+      const modeFilterHidden = document.getElementById('modeFilter');
+      const selectedMode = modeFilterHidden ? modeFilterHidden.value : '';
 
       let filtered = Array.isArray(subscriptionsCache) ? [...subscriptionsCache] : [];
 
@@ -877,15 +969,19 @@ const lunarBiz = {
       });
     }
 
-    const categorySelect = document.getElementById('categoryFilter');
-    if (categorySelect) {
-      categorySelect.addEventListener('change', () => renderSubscriptionTable());
+    const categoryFilterHidden = document.getElementById('categoryFilter');
+    if (categoryFilterHidden && !categoryFilterHidden.dataset.filterChangeBound) {
+      categoryFilterHidden.dataset.filterChangeBound = 'true';
+      categoryFilterHidden.addEventListener('change', () => renderSubscriptionTable());
     }
 
-    const modeSelect = document.getElementById('modeFilter');
-    if (modeSelect) {
-      modeSelect.addEventListener('change', () => renderSubscriptionTable());
+    const modeFilterHidden = document.getElementById('modeFilter');
+    if (modeFilterHidden && !modeFilterHidden.dataset.filterChangeBound) {
+      modeFilterHidden.dataset.filterChangeBound = 'true';
+      modeFilterHidden.addEventListener('change', () => renderSubscriptionTable());
     }
+
+    initListFilterDropdowns();
 
     // 获取所有订阅并按到期时间排序
     async function loadSubscriptions(showLoading = true) {
@@ -2129,6 +2225,16 @@ const lunarBiz = {
       }
     });
 
+    function updateReminderHintFromUnit() {
+      const reminderUnit = document.getElementById('reminderUnit');
+      const reminderHint = document.getElementById('reminderHint');
+      if (!reminderUnit || !reminderHint) return;
+      const u = reminderUnit.value;
+      reminderHint.textContent = u === 'hour'
+        ? '小时级提醒：需保证 Worker 每小时执行；0 表示仅到期时提醒'
+        : '0 = 仅在到期时提醒；选择"小时"需要将 Worker 定时任务调整为小时级执行';
+    }
+
     function setupModalEventListeners() {     
       const calculateExpiryBtn = document.getElementById('calculateExpiryBtn'); // 获取DOM元素
       const useLunar = document.getElementById('useLunar');
@@ -2140,6 +2246,20 @@ const lunarBiz = {
       initCustomDropdown('customType', 'customTypeDropdown', TYPE_OPTIONS); // 初始化自定义下拉菜单
       initCustomDropdown('category', 'categoryDropdown', CATEGORY_OPTIONS);
       initCustomDropdown('subscriptionMode', 'subscriptionModeDropdown', SUBSCRIPTION_MODE_OPTIONS);
+
+      if (document.getElementById('currencyDisplay')) {
+        initValueDropdown('currencyDisplay', 'currencyDropdown', 'currency', CURRENCY_ENTRIES);
+      }
+      if (document.getElementById('periodUnitDisplay')) {
+        initValueDropdown('periodUnitDisplay', 'periodUnitDropdown', 'periodUnit', PERIOD_UNIT_ENTRIES, {
+          onSelect: () => calculateExpiryDate()
+        });
+      }
+      if (document.getElementById('reminderUnitDisplay')) {
+        initValueDropdown('reminderUnitDisplay', 'reminderUnitDropdown', 'reminderUnit', REMINDER_UNIT_ENTRIES, {
+          onSelect: () => updateReminderHintFromUnit()
+        });
+      }
       
       if (calculateExpiryBtn && !calculateExpiryBtn.dataset.bound) {
         calculateExpiryBtn.dataset.bound = 'true';
