@@ -413,7 +413,7 @@
           localStorage.setItem('timezoneUpdated', Date.now().toString());
           
           // 如果当前在订阅列表页面，则自动刷新页面以更新时区显示
-          if (window.location.pathname === '/admin') {
+          if (window.location.pathname === '/admin/list') {
             window.location.reload();
           }
         } else {

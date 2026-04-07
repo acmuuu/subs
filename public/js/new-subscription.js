@@ -2164,7 +2164,7 @@ const lunarBiz = {
       }
       if (cancelBtn && !cancelBtn.dataset.bound) {
         cancelBtn.dataset.bound = 'true';
-        cancelBtn.addEventListener('click', () => { window.location.href = '/admin'; });
+        cancelBtn.addEventListener('click', () => { window.location.href = '/admin/list'; });
       }
 
       ['startDate', 'periodValue', 'periodUnit'].forEach(id => {
@@ -2323,7 +2323,7 @@ const lunarBiz = {
             document.body.classList.remove('overflow-hidden');
             loadSubscriptions();
           } else {
-            window.location.href = '/admin';
+            window.location.href = '/admin/list';
           }
         } else {
           showToast((id ? '更新' : '添加') + '订阅失败: ' + (result.message || '未知错误'), 'error');

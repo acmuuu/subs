@@ -44,8 +44,22 @@ async function handleAdminRequest(request, env) {
       });
     }
 
-    return new Response(adminPage, {
-      headers: { 'Content-Type': 'text/html; charset=utf-8' }
+    if (pathname === '/admin/list' || pathname === '/admin/list/') {
+      return new Response(adminPage, {
+        headers: { 'Content-Type': 'text/html; charset=utf-8' }
+      });
+    }
+
+    if (pathname === '/admin' || pathname === '/admin/') {
+      return new Response('', {
+        status: 302,
+        headers: { Location: '/admin/list' + url.search }
+      });
+    }
+
+    return new Response('', {
+      status: 302,
+      headers: { Location: '/admin/list' + url.search }
     });
   } catch (error) {
     console.error('[管理页面] 处理请求时出错:', error);
