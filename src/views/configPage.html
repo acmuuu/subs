@@ -104,11 +104,14 @@
           
           <div class="mb-3">
             <label for="themeModeSelect" class="block text-sm font-medium text-gray-700 mb-1">主题模式</label>
-            <select id="themeModeSelect" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
+            <div class="app-select-wrap">
+            <select id="themeModeSelect" class="app-select w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
               <option value="light">🌞 浅色模式</option>
               <option value="dark">🌙 暗黑模式</option>
               <option value="system">🖥️ 跟随系统</option>
             </select>
+            <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
+            </div>
             <p class="mt-1 text-sm text-gray-500">选择系统的外观风格</p>
           </div>
           
@@ -126,7 +129,8 @@
           <h3 class="text-lg font-medium text-gray-900 mb-3">时区设置</h3>
           <div class="mb-3">
           <label for="timezone" class="block text-sm font-medium text-gray-700 mb-1">时区选择</label>
-          <select id="timezone" name="timezone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
+          <div class="app-select-wrap">
+          <select id="timezone" name="timezone" class="app-select w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
             <option value="UTC">世界标准时间（UTC+0）</option>
             <option value="Asia/Shanghai">中国标准时间（UTC+8）</option>
             <option value="Asia/Hong_Kong">香港时间（UTC+8）</option>
@@ -146,6 +150,8 @@
             <option value="Australia/Melbourne">墨尔本时间（UTC+10）</option>
             <option value="Pacific/Auckland">奥克兰时间（UTC+12）</option>
           </select>
+          <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
+          </div>
             <p class="mt-1 text-sm text-gray-500">该项仅用于兼容旧配置与展示参考；后端调度与提醒计算统一使用 UTC，页面时间始终按当前设备时区显示。</p>
           </div>
         </div>
@@ -310,11 +316,14 @@
               </div>
               <div>
                 <label for="webhookMethod" class="block text-sm font-medium text-gray-700">请求方法</label>
-                <select id="webhookMethod" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <div class="mt-1 app-select-wrap">
+                <select id="webhookMethod" class="app-select block w-full h-10 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option value="POST">POST</option>
                   <option value="GET">GET</option>
                   <option value="PUT">PUT</option>
                 </select>
+                <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
+                </div>
               </div>
               <div>
                 <label for="webhookHeaders" class="block text-sm font-medium text-gray-700">自定义请求头 (JSON格式，可选)</label>
@@ -356,10 +365,13 @@
               </div>
               <div>
                 <label for="wechatbotMsgType" class="block text-sm font-medium text-gray-700">消息类型</label>
-                <select id="wechatbotMsgType" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <div class="mt-1 app-select-wrap">
+                <select id="wechatbotMsgType" class="app-select block w-full h-10 border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                   <option value="text">文本消息</option>
                   <option value="markdown">Markdown消息</option>
                 </select>
+                <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
+                </div>
                 <p class="mt-1 text-sm text-gray-500">选择发送的消息格式类型</p>
               </div>
               <div>

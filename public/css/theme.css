@@ -492,3 +492,33 @@
         color: #f3f4f6;
     }
   }
+
+  /* 全局原生 select：去系统箭头、统一右侧 chevron（管理页 / 新建页共用） */
+  .app-select-wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+  }
+  .app-select-wrap .app-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: none;
+    cursor: pointer;
+    padding-right: 2.25rem;
+  }
+  .app-select-wrap .app-select::-ms-expand {
+    display: none;
+  }
+  .app-select-chevron {
+    position: absolute;
+    right: 0.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    line-height: 1;
+    color: #9ca3af;
+  }
+  html.dark .app-select-chevron {
+    color: #6b7280;
+  }
