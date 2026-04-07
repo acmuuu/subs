@@ -25,6 +25,107 @@
     // 记录用户是否点击了“清空”某个密钥字段；保存时会提交给后端处理
     const CLEAR_SECRET_FIELDS = new Set();
 
+    const THEME_MODE_OPTIONS = ['🌞 浅色模式', '🌙 暗黑模式', '🖥️ 跟随系统'];
+    const THEME_MODE_LABEL_FROM_API = { light: '🌞 浅色模式', dark: '🌙 暗黑模式', system: '🖥️ 跟随系统' };
+
+    function themeModeLabelFromApi(mode) {
+      return THEME_MODE_LABEL_FROM_API[mode] || THEME_MODE_LABEL_FROM_API.system;
+    }
+
+    function parseThemeModeFromField(raw) {
+      const t = (raw || '').trim();
+      if (!t) return 'system';
+      const lower = t.toLowerCase();
+      if (lower === 'light' || t.indexOf('浅色') !== -1 || t.indexOf('🌞') !== -1) return 'light';
+      if (lower === 'dark' || t.indexOf('暗黑') !== -1 || t.indexOf('🌙') !== -1) return 'dark';
+      if (lower === 'system' || t.indexOf('跟随') !== -1 || t.indexOf('🖥') !== -1) return 'system';
+      return 'system';
+    }
+
+    const TIMEZONE_LIST = [
+      { value: 'UTC', name: '世界标准时间', offset: '+0' },
+      { value: 'Asia/Shanghai', name: '中国标准时间', offset: '+8' },
+      { value: 'Asia/Hong_Kong', name: '香港时间', offset: '+8' },
+      { value: 'Asia/Taipei', name: '台北时间', offset: '+8' },
+      { value: 'Asia/Singapore', name: '新加坡时间', offset: '+8' },
+      { value: 'Asia/Tokyo', name: '日本时间', offset: '+9' },
+      { value: 'Asia/Seoul', name: '韩国时间', offset: '+9' },
+      { value: 'America/New_York', name: '美国东部时间', offset: '-5' },
+      { value: 'America/Chicago', name: '美国中部时间', offset: '-6' },
+      { value: 'America/Denver', name: '美国山地时间', offset: '-7' },
+      { value: 'America/Los_Angeles', name: '美国太平洋时间', offset: '-8' },
+      { value: 'Europe/London', name: '英国时间', offset: '+0' },
+      { value: 'Europe/Paris', name: '巴黎时间', offset: '+1' },
+      { value: 'Europe/Berlin', name: '柏林时间', offset: '+1' },
+      { value: 'Europe/Moscow', name: '莫斯科时间', offset: '+3' },
+      { value: 'Australia/Sydney', name: '悉尼时间', offset: '+10' },
+      { value: 'Australia/Melbourne', name: '墨尔本时间', offset: '+10' },
+      { value: 'Pacific/Auckland', name: '奥克兰时间', offset: '+12' }
+    ];
+
+    function timezoneDisplayLabel(tz) {
+      return tz.name + '（UTC' + tz.offset + '）';
+    }
+
+    function timezoneLabelFromValue(value) {
+      const entry = TIMEZONE_LIST.find(tz => tz.value === value);
+      return entry ? timezoneDisplayLabel(entry) : null;
+    }
+
+    function parseTimezoneFromField(raw) {
+      const t = (raw || '').trim();
+      if (!t) return 'UTC';
+      const byLabel = TIMEZONE_LIST.find(tz => timezoneDisplayLabel(tz) === t);
+      if (byLabel) return byLabel.value;
+      const byValue = TIMEZONE_LIST.find(tz => tz.value === t);
+      if (byValue) return byValue.value;
+      return 'UTC';
+    }
+
+    function initCustomDropdown(inputId, listId, options) {
+      const input = document.getElementById(inputId);
+      const list = document.getElementById(listId);
+      if (!input || !list) return;
+      list.innerHTML = options.map(function (opt) {
+        return '<div class="dropdown-item">' + opt + '</div>';
+      }).join('');
+
+      if (!input.dataset.dropdownBound) {
+        input.dataset.dropdownBound = 'true';
+        const showList = function (e) {
+          e.stopPropagation();
+          document.querySelectorAll('.custom-dropdown-list').forEach(function (el) {
+            el.classList.remove('show');
+          });
+          list.classList.add('show');
+        };
+        input.addEventListener('focus', showList);
+        input.addEventListener('click', showList);
+        list.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (e.target.classList.contains('dropdown-item')) {
+            input.value = e.target.textContent;
+            input.dispatchEvent(new Event('input'));
+            list.classList.remove('show');
+          }
+        });
+      }
+    }
+
+    function initThemeAndTimezoneDropdowns() {
+      initCustomDropdown('themeModeSelect', 'themeModeDropdown', THEME_MODE_OPTIONS);
+      const tzLabels = TIMEZONE_LIST.map(function (tz) { return timezoneDisplayLabel(tz); });
+      initCustomDropdown('timezone', 'timezoneDropdown', tzLabels);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.custom-dropdown-wrapper')) {
+        document.querySelectorAll('.custom-dropdown-list').forEach(function (el) {
+          el.classList.remove('show');
+        });
+      }
+    });
+
     function setSecretStatus(key, text) {
       const el = document.getElementById(key + 'Status');
       if (!el) return;
@@ -84,7 +185,7 @@
         // 3) 如需清空，请点对应的“清空”按钮（会在保存时生效）。
 
         document.getElementById('adminUsername').value = config.ADMIN_USERNAME || '';
-        document.getElementById('themeModeSelect').value = config.THEME_MODE || 'system';  // 回显主题设置
+        document.getElementById('themeModeSelect').value = themeModeLabelFromApi(config.THEME_MODE || 'system');
 
         // 非敏感字段正常回显
         document.getElementById('tgChatId').value = config.TG_CHAT_ID || '';
@@ -136,8 +237,7 @@
         // 加载农历显示设置
         document.getElementById('showLunarGlobal').checked = config.SHOW_LUNAR === true;
 
-        // 动态生成时区选项，并设置保存的值
-        generateTimezoneOptions(config.TIMEZONE || 'UTC');
+        syncTimezoneFieldFromValue(config.TIMEZONE || 'UTC');
 
         // 处理多选通知渠道
         const enabledNotifiers = config.ENABLED_NOTIFIERS || ['notifyx'];
@@ -152,47 +252,14 @@
       }
     }
     
-    // 动态生成时区选项
-    function generateTimezoneOptions(selectedTimezone = 'UTC') {
-      const timezoneSelect = document.getElementById('timezone');
+    function syncTimezoneFieldFromValue(selectedTimezone) {
+      const input = document.getElementById('timezone');
+      if (!input) return;
       const fallbackTimezone = 'UTC';
-      
-      const timezones = [
-        { value: 'UTC', name: '世界标准时间', offset: '+0' },
-        { value: 'Asia/Shanghai', name: '中国标准时间', offset: '+8' },
-        { value: 'Asia/Hong_Kong', name: '香港时间', offset: '+8' },
-        { value: 'Asia/Taipei', name: '台北时间', offset: '+8' },
-        { value: 'Asia/Singapore', name: '新加坡时间', offset: '+8' },
-        { value: 'Asia/Tokyo', name: '日本时间', offset: '+9' },
-        { value: 'Asia/Seoul', name: '韩国时间', offset: '+9' },
-        { value: 'America/New_York', name: '美国东部时间', offset: '-5' },
-        { value: 'America/Chicago', name: '美国中部时间', offset: '-6' },
-        { value: 'America/Denver', name: '美国山地时间', offset: '-7' },
-        { value: 'America/Los_Angeles', name: '美国太平洋时间', offset: '-8' },
-        { value: 'Europe/London', name: '英国时间', offset: '+0' },
-        { value: 'Europe/Paris', name: '巴黎时间', offset: '+1' },
-        { value: 'Europe/Berlin', name: '柏林时间', offset: '+1' },
-        { value: 'Europe/Moscow', name: '莫斯科时间', offset: '+3' },
-        { value: 'Australia/Sydney', name: '悉尼时间', offset: '+10' },
-        { value: 'Australia/Melbourne', name: '墨尔本时间', offset: '+10' },
-        { value: 'Pacific/Auckland', name: '奥克兰时间', offset: '+12' }
-      ];
-      
-      // 清空现有选项
-      timezoneSelect.innerHTML = '';
-      
-      // 添加新选项
-      timezones.forEach(tz => {
-        const option = document.createElement('option');
-        option.value = tz.value;
-        option.textContent = tz.name + '（UTC' + tz.offset + '）';
-        timezoneSelect.appendChild(option);
-      });
-
-      const timezoneExists = timezones.some(tz => tz.value === selectedTimezone);
-      timezoneSelect.value = timezoneExists ? selectedTimezone : fallbackTimezone;
-
-      if (!timezoneExists) {
+      const timezoneExists = TIMEZONE_LIST.some(function (tz) { return tz.value === selectedTimezone; });
+      const valueToUse = timezoneExists ? selectedTimezone : fallbackTimezone;
+      input.value = timezoneLabelFromValue(valueToUse) || timezoneDisplayLabel(TIMEZONE_LIST[0]);
+      if (!timezoneExists && selectedTimezone) {
         showToast('检测到未知时区配置，已回退为 UTC，请重新确认后保存', 'warning', 4500);
       }
     }
@@ -260,7 +327,7 @@
 
       const config = {
         ADMIN_USERNAME: document.getElementById('adminUsername').value.trim(),
-        THEME_MODE: document.getElementById('themeModeSelect').value,      // 保存主题设置
+        THEME_MODE: parseThemeModeFromField(document.getElementById('themeModeSelect').value),
 
         // token/密钥类字段：默认留空=不修改；要清空则走 CLEAR_SECRET_FIELDS
         TG_BOT_TOKEN: document.getElementById('tgBotToken').value.trim(),
@@ -288,7 +355,7 @@
         BARK_IS_ARCHIVE: document.getElementById('barkIsArchive').checked.toString(),
         GOTIFY_SERVER_URL: document.getElementById('gotifyServerUrl').value.trim(),
         ENABLED_NOTIFIERS: enabledNotifiers,
-        TIMEZONE: document.getElementById('timezone').value.trim(),
+        TIMEZONE: parseTimezoneFromField(document.getElementById('timezone').value),
 
         // 标记“清空哪些密钥字段”
         CLEAR_SECRET_FIELDS: Array.from(CLEAR_SECRET_FIELDS),
@@ -526,6 +593,7 @@
       wireClearSecretButton('clearThirdPartyToken', 'thirdPartyToken', 'THIRD_PARTY_API_TOKEN');
       wireClearSecretButton('clearGotifyAppToken', 'gotifyAppToken', 'GOTIFY_APP_TOKEN');
 
+      initThemeAndTimezoneDropdowns();
       loadConfig();
     });
     
@@ -536,6 +604,24 @@
     
     // 实时显示系统时间和时区
     async function showSystemTime() {
+      function setNavClockParts(timeStr, tzStr) {
+        [
+          { id: 'systemTimeDisplay', sep: '  ' },
+          { id: 'mobileTimeDisplay', sep: ' ' }
+        ].forEach(({ id, sep }) => {
+          const root = document.getElementById(id);
+          if (!root) return;
+          const tEl = root.querySelector('.nav-clock-time');
+          const zEl = root.querySelector('.nav-clock-tz');
+          if (tEl && zEl) {
+            tEl.textContent = timeStr;
+            zEl.textContent = tzStr;
+          } else {
+            root.textContent = timeStr + sep + tzStr;
+          }
+        });
+      }
+
       try {
         // 获取后台配置的时区
         const response = await fetch('/api/config');
@@ -596,15 +682,7 @@
           const now = new Date();
           const timeStr = formatTime(now, globalTimezone);
           const tzStr = formatTimezoneDisplay(globalTimezone);
-          const el = document.getElementById('systemTimeDisplay');
-          if (el) {
-            el.textContent = timeStr + '  ' + tzStr;
-          }
-          // 更新移动端显示 (新增)
-          const mobileEl = document.getElementById('mobileTimeDisplay');
-          if (mobileEl) {
-            mobileEl.textContent = timeStr + ' ' + tzStr;
-          }
+          setNavClockParts(timeStr, tzStr);
         }
         update();
 
@@ -631,11 +709,7 @@
           }
         }, 30000);
       } catch (e) {
-        // 出错时显示本地时间
-        const el = document.getElementById('systemTimeDisplay');
-        if (el) {
-          el.textContent = new Date().toLocaleString();
-        }
+        setNavClockParts(new Date().toLocaleString(), '');
       }
     }
     showSystemTime();

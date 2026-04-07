@@ -29,8 +29,11 @@
           if (config.THEME_MODE && config.THEME_MODE !== localStorage.getItem('themeMode')) {
             localStorage.setItem('themeMode', config.THEME_MODE);
             applyTheme(config.THEME_MODE);
-            const select = document.getElementById('themeModeSelect');
-            if (select) select.value = config.THEME_MODE;
+            const themeInput = document.getElementById('themeModeSelect');
+            if (themeInput) {
+              const labels = { light: '🌞 浅色模式', dark: '🌙 暗黑模式', system: '🖥️ 跟随系统' };
+              themeInput.value = labels[config.THEME_MODE] || labels.system;
+            }
           }
         } catch(e) {}
       }

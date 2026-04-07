@@ -522,3 +522,28 @@
   html.dark .app-select-chevron {
     color: #6b7280;
   }
+
+  /* 导航栏时间：日期时间固定宽度（如 2026/04/07 09:25:01）+ 等宽数字，避免刷新时抖动 */
+  #systemTimeDisplay {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    white-space: nowrap;
+    vertical-align: bottom;
+  }
+  #mobileTimeDisplay {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+  }
+  .nav-clock-time {
+    display: inline-block;
+    width: 15ch;
+    min-width: 15ch;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1, "lnum" 1;
+    text-align: left;
+  }
+  .nav-clock-tz {
+    font-variant-numeric: tabular-nums;
+    min-width: 0;
+  }

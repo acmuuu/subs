@@ -2078,6 +2078,21 @@ const lunarBiz = {
       "开发", "生产力", "社交", "健康", "财务"
     ];
 
+    const SUBSCRIPTION_MODE_OPTIONS = ['📅 循环订阅', '⏳ 到期重置'];
+
+    function subscriptionModeLabelFromApi(mode) {
+      return (mode === 'reset') ? '⏳ 到期重置' : '📅 循环订阅';
+    }
+
+    function parseSubscriptionModeFromField(raw) {
+      const t = (raw || '').trim();
+      if (!t) return 'cycle';
+      const lower = t.toLowerCase();
+      if (lower === 'reset' || t.indexOf('到期重置') !== -1 || t.indexOf('⏳') !== -1) return 'reset';
+      if (lower === 'cycle' || t.indexOf('循环订阅') !== -1 || t.indexOf('循环') !== -1 || t.indexOf('📅') !== -1) return 'cycle';
+      return 'cycle';
+    }
+
     function initCustomDropdown(inputId, listId, options) {
       const input = document.getElementById(inputId);
       const list = document.getElementById(listId);
@@ -2124,7 +2139,8 @@ const lunarBiz = {
       const cancelBtn = document.getElementById('cancelBtn');
       
       initCustomDropdown('customType', 'customTypeDropdown', TYPE_OPTIONS); // 初始化自定义下拉菜单
-      initCustomDropdown('category', 'categoryDropdown', CATEGORY_OPTIONS);    
+      initCustomDropdown('category', 'categoryDropdown', CATEGORY_OPTIONS);
+      initCustomDropdown('subscriptionMode', 'subscriptionModeDropdown', SUBSCRIPTION_MODE_OPTIONS);
       
       if (calculateExpiryBtn && !calculateExpiryBtn.dataset.bound) {
         calculateExpiryBtn.dataset.bound = 'true';
@@ -2266,7 +2282,7 @@ const lunarBiz = {
         name: document.getElementById('name').value.trim(),
         customType: document.getElementById('customType').value.trim(),
         category: document.getElementById('category').value.trim(),
-        subscriptionMode: document.getElementById('subscriptionMode').value, // 新增修改，表单提交时带上 subscriptionMode 字段
+        subscriptionMode: parseSubscriptionModeFromField(document.getElementById('subscriptionMode').value),
         notes: document.getElementById('notes').value.trim() || '',
         currency: document.getElementById('currency').value, // 新增修改，表单提交时带上 currency 字段
         amount: document.getElementById('amount').value ? parseFloat(document.getElementById('amount').value) : null,
@@ -2333,7 +2349,7 @@ const lunarBiz = {
           document.getElementById('modalTitle').textContent = '编辑订阅';
           document.getElementById('subscriptionId').value = subscription.id;
           document.getElementById('name').value = subscription.name;
-          document.getElementById('subscriptionMode').value = subscription.subscriptionMode || 'cycle'; // 默认为 cycle
+          document.getElementById('subscriptionMode').value = subscriptionModeLabelFromApi(subscription.subscriptionMode || 'cycle');
           document.getElementById('customType').value = subscription.customType || '';
           document.getElementById('category').value = subscription.category || '';
           document.getElementById('notes').value = subscription.notes || '';
@@ -2479,6 +2495,24 @@ const lunarBiz = {
 
     // 实时显示系统时间和时区（前端统一本地时区显示）
     async function showSystemTime() {
+      function setNavClockParts(timeStr, tzStr) {
+        [
+          { id: 'systemTimeDisplay', sep: '  ' },
+          { id: 'mobileTimeDisplay', sep: ' ' }
+        ].forEach(({ id, sep }) => {
+          const root = document.getElementById(id);
+          if (!root) return;
+          const tEl = root.querySelector('.nav-clock-time');
+          const zEl = root.querySelector('.nav-clock-tz');
+          if (tEl && zEl) {
+            tEl.textContent = timeStr;
+            zEl.textContent = tzStr;
+          } else {
+            root.textContent = timeStr + sep + tzStr;
+          }
+        });
+      }
+
       try {
         const response = await fetch('/api/config');
         const config = await response.json();
@@ -2538,24 +2572,14 @@ const lunarBiz = {
             hour: '2-digit', minute: '2-digit', second: '2-digit'
           });
           const tzStr = formatTimezoneDisplay(localTimezone);
-          const el = document.getElementById('systemTimeDisplay');
-          if (el) {
-            el.textContent = `${timeStr}  ${tzStr}`;
-          }
-          const mobileEl = document.getElementById('mobileTimeDisplay');
-          if (mobileEl) {
-            mobileEl.textContent = `${timeStr} ${tzStr}`;
-          }
+          setNavClockParts(timeStr, tzStr);
         }
 
         update();
         setInterval(update, 1000);
         loadSubscriptions();
       } catch (e) {
-        const el = document.getElementById('systemTimeDisplay');
-        if (el) {
-          el.textContent = new Date().toLocaleString();
-        }
+        setNavClockParts(new Date().toLocaleString(), '');
       }
     }
     showSystemTime();

@@ -155,6 +155,9 @@
     }
     /* 【新增】自定义下拉菜单样式 (用于替代 datalist) */
     .custom-dropdown-wrapper {
+      width: 100%;
+    }
+    .custom-dropdown-anchor {
       position: relative;
       width: 100%;
     }
@@ -166,11 +169,11 @@
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 0.5rem;
-      margin-top: 4px;
+      margin-top: 3px;
       max-height: 200px;
       overflow-y: auto;
       z-index: 60; /* 确保在其他元素之上 */
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1);
       display: none; /* 默认隐藏 */
     }
     .custom-dropdown-list.show {

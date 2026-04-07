@@ -18,11 +18,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-14">
         <div class="flex items-center shrink-0">
-          <div class="flex items-center">
+          <a href="/admin/dashboard" class="flex items-center rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-1 no-underline hover:opacity-90 transition-opacity" aria-label="订阅管理系统，前往仪表盘">
             <i class="fas fa-calendar-check text-indigo-600 text-2xl mr-2"></i>
             <span class="font-bold text-xl text-gray-800">订阅管理系统</span>
-          </div>
-          <span id="systemTimeDisplay" class="ml-4 text-base text-indigo-600 font-normal hidden md:block pt-1"></span>
+          </a>
+          <span id="systemTimeDisplay" class="ml-4 text-base text-indigo-600 font-normal hidden md:inline-flex md:items-baseline md:gap-x-2 pt-1" aria-live="polite">
+            <span class="nav-clock-time"></span><span class="nav-clock-tz"></span>
+          </span>
         </div>
           
         <div class="hidden md:flex items-center space-x-4 ml-auto">
@@ -53,7 +55,9 @@
 
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-b border-gray-200 w-full">
       <div class="px-4 pt-2 pb-4 space-y-2">
-        <div id="mobileTimeDisplay" class="px-3 py-2.5 text-sm font-medium text-indigo-600 text-left border-b border-gray-100 mb-2 leading-snug"></div>
+        <div id="mobileTimeDisplay" class="px-3 py-2.5 text-sm font-medium text-indigo-600 text-left border-b border-gray-100 mb-2 leading-snug flex flex-wrap items-baseline gap-x-2" aria-live="polite">
+          <span class="nav-clock-time"></span><span class="nav-clock-tz"></span>
+        </div>
         <a href="/admin/dashboard" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 active:bg-indigo-100 transition-colors">
           <i class="fas fa-chart-line w-6 text-center mr-2"></i>仪表盘
         </a>
@@ -104,13 +108,12 @@
           
           <div class="mb-3">
             <label for="themeModeSelect" class="block text-sm font-medium text-gray-700 mb-1">主题模式</label>
-            <div class="app-select-wrap">
-            <select id="themeModeSelect" class="app-select w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
-              <option value="light">🌞 浅色模式</option>
-              <option value="dark">🌙 暗黑模式</option>
-              <option value="system">🖥️ 跟随系统</option>
-            </select>
-            <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
+            <div class="custom-dropdown-wrapper">
+              <div class="custom-dropdown-anchor">
+                <input type="text" id="themeModeSelect" placeholder="选择或输入主题模式" autocomplete="off"
+                  class="w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
+                <div id="themeModeDropdown" class="custom-dropdown-list"></div>
+              </div>
             </div>
             <p class="mt-1 text-sm text-gray-500">选择系统的外观风格</p>
           </div>
@@ -128,30 +131,14 @@
         <div class="border-b border-gray-200 pb-3">
           <h3 class="text-lg font-medium text-gray-900 mb-3">时区设置</h3>
           <div class="mb-3">
-          <label for="timezone" class="block text-sm font-medium text-gray-700 mb-1">时区选择</label>
-          <div class="app-select-wrap">
-          <select id="timezone" name="timezone" class="app-select w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white">
-            <option value="UTC">世界标准时间（UTC+0）</option>
-            <option value="Asia/Shanghai">中国标准时间（UTC+8）</option>
-            <option value="Asia/Hong_Kong">香港时间（UTC+8）</option>
-            <option value="Asia/Taipei">台北时间（UTC+8）</option>
-            <option value="Asia/Singapore">新加坡时间（UTC+8）</option>
-            <option value="Asia/Tokyo">日本时间（UTC+9）</option>
-            <option value="Asia/Seoul">韩国时间（UTC+9）</option>
-            <option value="America/New_York">美国东部时间（UTC-5）</option>
-            <option value="America/Chicago">美国中部时间（UTC-6）</option>
-            <option value="America/Denver">美国山地时间（UTC-7）</option>
-            <option value="America/Los_Angeles">美国太平洋时间（UTC-8）</option>
-            <option value="Europe/London">英国时间（UTC+0）</option>
-            <option value="Europe/Paris">巴黎时间（UTC+1）</option>
-            <option value="Europe/Berlin">柏林时间（UTC+1）</option>
-            <option value="Europe/Moscow">莫斯科时间（UTC+3）</option>
-            <option value="Australia/Sydney">悉尼时间（UTC+10）</option>
-            <option value="Australia/Melbourne">墨尔本时间（UTC+10）</option>
-            <option value="Pacific/Auckland">奥克兰时间（UTC+12）</option>
-          </select>
-          <span class="app-select-chevron" aria-hidden="true"><i class="fas fa-chevron-down text-xs"></i></span>
-          </div>
+            <label for="timezone" class="block text-sm font-medium text-gray-700 mb-1">时区选择</label>
+            <div class="custom-dropdown-wrapper">
+              <div class="custom-dropdown-anchor">
+                <input type="text" id="timezone" name="timezone" placeholder="选择或输入时区" autocomplete="off"
+                  class="w-full h-10 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 bg-white sm:text-sm">
+                <div id="timezoneDropdown" class="custom-dropdown-list"></div>
+              </div>
+            </div>
             <p class="mt-1 text-sm text-gray-500">该项仅用于兼容旧配置与展示参考；后端调度与提醒计算统一使用 UTC，页面时间始终按当前设备时区显示。</p>
           </div>
         </div>

@@ -10,6 +10,24 @@
 
     // 前端统一本地时区显示
     async function showSystemTime() {
+      function setNavClockParts(timeStr, tzStr) {
+        [
+          { id: 'systemTimeDisplay', sep: '  ' },
+          { id: 'mobileTimeDisplay', sep: ' ' }
+        ].forEach(({ id, sep }) => {
+          const root = document.getElementById(id);
+          if (!root) return;
+          const tEl = root.querySelector('.nav-clock-time');
+          const zEl = root.querySelector('.nav-clock-tz');
+          if (tEl && zEl) {
+            tEl.textContent = timeStr;
+            zEl.textContent = tzStr;
+          } else {
+            root.textContent = timeStr + sep + tzStr;
+          }
+        });
+      }
+
       try {
         const localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
@@ -64,20 +82,14 @@
             hour: '2-digit', minute: '2-digit', second: '2-digit'
           });
           const tzStr = formatTimezoneDisplay(localTimezone);
-          const el = document.getElementById('systemTimeDisplay');
-          if (el) {
-            el.textContent = `${timeStr}  ${tzStr}`;
-          }
-          const mobileEl = document.getElementById('mobileTimeDisplay');
-          if (mobileEl) {
-            mobileEl.textContent = `${timeStr} ${tzStr}`;
-          }
+          setNavClockParts(timeStr, tzStr);
         }
 
         update();
         setInterval(update, 1000);
       } catch (e) {
         console.error(e);
+        setNavClockParts(new Date().toLocaleString(), '');
       }
     }
 
